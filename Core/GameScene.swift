@@ -108,15 +108,20 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         print("startup")
+        
+        
+        pickMe.position.x = self.frame.height / 2 - 200
+        pickMe.position.y = self.frame.height / 2 - 150
+        
         addChild(youWinScreen)
         addChild(youLoseScreen)
         youWinScreen.position.x = view.frame.width / 2 - 30
         youWinScreen.position.y = view.frame.height * 2
-        youWinScreen.zPosition = 5
+        youWinScreen.zPosition = 6
         
         youLoseScreen.position.x = view.frame.width / 2
         youLoseScreen.position.y = view.frame.height * 2
-        youLoseScreen.zPosition = 5
+        youLoseScreen.zPosition = 6
         
         addChild(menu0)
         addChild(menu2)
@@ -133,17 +138,17 @@ class GameScene: SKScene {
         menu4.position.x = view.frame.width / 2
         menu4.position.y = view.frame.height * (0 - 2)
         
-        menu0.zPosition = 3
-        menu1.zPosition = 3
-        menu2.zPosition = 3
-        menu3.zPosition = 3
-        menu4.zPosition = 3
+        menu0.zPosition = 5
+        menu1.zPosition = 5
+        menu2.zPosition = 5
+        menu3.zPosition = 5
+        menu4.zPosition = 5
         
-        menu0.alpha = 0.75
-        menu1.alpha = 0.75
-        menu2.alpha = 0.75
-        menu3.alpha = 0.75
-        menu4.alpha = 0.75
+        menu0.alpha = 0.8
+        menu1.alpha = 0.8
+        menu2.alpha = 0.8
+        menu3.alpha = 0.8
+        menu4.alpha = 0.8
         
         
         
@@ -317,9 +322,11 @@ class GameScene: SKScene {
                 runCheckState()
             }
         }else{
+            
             whatsGoing = true
             //cannot lose tutorial level 0
             winLoseAnims()
+            gameIsEnded()
         }
     }
     
@@ -357,21 +364,24 @@ class GameScene: SKScene {
     
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
+        if levelClicked > 14{
+            levelClicked = 0
+        }
         print("You Are On Level \(levelClicked + 1)")
         
-        let numbPixUp = CGFloat(30 * levelClicked)
-        print("\(numbPixUp)")
-        addChild(pickMe)
-        levelPix()
+     
+        
         
         addChild(homeButton)
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
-        pickMe.position.x = self.frame.width / 4
+       
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////***
-        pickMe.position.y = self.frame.height / 2 - 100
+        levelPix()
         pickMe.zPosition = 2
+        
+        addChild(pickMe)
         // theLight.alpha = 1.0
         
     }
@@ -470,6 +480,22 @@ class GameScene: SKScene {
         nibTwo.position.x = circleTwo.frame.width / 2
         nibTwo.position.y = circleTwo.frame.height / 2
     }
+    func testAllLevels(){
+        ALBTouch += 1
+        if forba == 1{
+            levelClicked += 1
+            print("You Are On Level \(levelClicked + 1)")
+            if levelClicked >= 14{
+                forba = 2
+            }
+        }else{
+            levelClicked = 0
+            ALBTouch = 0
+            print("You Are On Level \(levelClicked + 1)")
+            forba = 1
+        }
+        levelPix()
+    }
     
     func testTouch(){
         //////////
@@ -531,15 +557,15 @@ class GameScene: SKScene {
     func levelPix(){
         //to find location of the level picker counter and animate it to move to the next level
         if levelClicked == 0{
-            let pixmove = SKAction.moveToY(self.frame.height / 2 - 100, duration: 2)
-        }else if levelClicked <= 8{
-            let numbPixUp = CGFloat(30 * (levelClicked + 1))
-            print("\(numbPixUp)")
-            let  pixmove = SKAction.moveToY(self.frame.height / 2 - 100 + numbPixUp, duration: 2)
+            let pixmove = SKAction.moveToY(self.frame.height / 2 - 150, duration: 0.1)
+        }else if levelClicked <= 14{
+            let numbPixUp = CGFloat(20 * (levelClicked + 1))
+            let  pixmove = SKAction.moveToY(self.frame.height / 2 - 150 + numbPixUp, duration: 2)
             pickMe.runAction(pixmove)
         }else{
             levelClicked = 0
-            let pixmove = SKAction.moveToY(self.frame.height / 2 - 100, duration: 2)
+            let numbPix = 0
+            let pixmove = SKAction.moveToY(self.frame.height / 2 - 150, duration: 2)
         }
         
     }
@@ -599,18 +625,20 @@ class GameScene: SKScene {
         
         let wait4me = SKAction.waitForDuration(0.5)
         let move2 = SKAction.moveToY(self.view!.frame.height * (7 / 12), duration: 1)
-        let moveBack2 = SKAction.moveToY(self.view!.frame.height * 2, duration: 1)
-        let endCheckAnim = SKAction.sequence([ move2, wait4me, moveBack2])
+        let moveBack2 = SKAction.moveToY(self.view!.frame.height * 2, duration: 0.7)
+        let deleteMenu = SKAction.runBlock{
+            self.menuDeletion()
+        }
+        let endCheckAnim = SKAction.sequence([ move2, wait4me, moveBack2, deleteMenu])
         if whatsGoing == true{
             youWinScreen.runAction(endCheckAnim)
             print("timetowin")
-            menuDeletion()
+           
         }else{
             youLoseScreen.runAction(endCheckAnim)
             print("timetolose")
-            menuDeletion()
+            
         }
-        
         
         //let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
         //theArrow.runAction(arrowForward)
@@ -623,7 +651,7 @@ class GameScene: SKScene {
         quitCurrentLevel()
         
         ///////////////////////////////////////////////////////////
-        if 0 <= levelClicked && levelClicked <= 8{
+        if 0 <= levelClicked && levelClicked <= 14{
             levelClicked += 1
         }else{
             levelClicked = 0
@@ -1012,27 +1040,7 @@ class GameScene: SKScene {
                     gameState = .PlayGame
                     runCheckState()
                 }else if anotherLevelButton.containsPoint(location) {
-                    //very broken
-                    
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////***
-                    ALBTouch += 1
-                    //pickLevel()
-                    //testCode 8 levels
-                    //adsf
-                    if forba == 1{
-                        levelClicked += 1
-                        print("You Are On Level \(levelClicked + 1)")
-                        if ALBTouch >= 8{
-                            forba = 2
-                        }
-                    }else{
-                        levelClicked = 0
-                        ALBTouch = 0
-                        print("You Are On Level \(levelClicked + 1)")
-                        forba = 1
-                    }
-                    levelPix()
-                    
+                    //testAllLevels()
                 }
             }
         }
