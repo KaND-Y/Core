@@ -35,6 +35,8 @@ class GameScene: SKScene {
     
     let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    var whatsGoing = false
+    
     
     var circleOne: SKSpriteNode!
     var circleTwo: SKSpriteNode!
@@ -106,6 +108,16 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         print("startup")
+        addChild(youWinScreen)
+        addChild(youLoseScreen)
+        youWinScreen.position.x = view.frame.width / 2 - 30
+        youWinScreen.position.y = view.frame.height * 2
+        youWinScreen.zPosition = 5
+        
+        youLoseScreen.position.x = view.frame.width / 2
+        youLoseScreen.position.y = view.frame.height * 2
+        youLoseScreen.zPosition = 5
+        
         addChild(menu0)
         addChild(menu2)
         addChild(menu3)
@@ -176,7 +188,6 @@ class GameScene: SKScene {
         addChild(theLight)
         
         
-        
         for circleNumber in 0...numRingCounterForLevel {
             let arrayOfCircleToCreate = arrayOfLevelToPlay[circleNumber]
             //print("\(arrayOfCircleToCreate) is the perameters for the circle # \(circleNumber) being created")
@@ -197,9 +208,6 @@ class GameScene: SKScene {
                 addChild(theArrow)
                 print("arrow to the knee")
             }
-            
-            
-            
             
             let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
             let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
@@ -264,11 +272,6 @@ class GameScene: SKScene {
                 let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
                 let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
                 
-                //            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
-                //                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
-                //                self.RotationDict["currentCircleNum_0"] = newCurNum
-                //            }
-                
                 let arrayOfCircles = Levels.infoForLevels[levelClicked]
                 let currentCircle = arrayOfCircles[ring]
                 let nextCircle = arrayOfCircles[ring + 1]
@@ -300,19 +303,23 @@ class GameScene: SKScene {
             if numRingCounterForLevel - winCount == 0 {
                 print("\(winCount) won out of \(numRingCounterForLevel)")
                 print("WE WON!!!")
+                whatsGoing = true
                 winCount = 0
-                winAnimation()
+                winLoseAnims()
                 gameIsEnded()
             }else{
                 print("\(winCount) won out of \(numRingCounterForLevel)")
                 print("better luck next time")
+                whatsGoing = false
+                winLoseAnims()
                 winCount = 0
                 gameState = .GameOver
                 runCheckState()
             }
         }else{
+            whatsGoing = true
             //cannot lose tutorial level 0
-            winAnimation()
+            winLoseAnims()
         }
     }
     
@@ -587,12 +594,26 @@ class GameScene: SKScene {
         print("game progress deleted")
     }
     
-    func winAnimation(){
+    func winLoseAnims(){
         menuCreation()
         
+        let wait4me = SKAction.waitForDuration(0.5)
+        let move2 = SKAction.moveToY(self.view!.frame.height * (7 / 12), duration: 1)
+        let moveBack2 = SKAction.moveToY(self.view!.frame.height * 2, duration: 1)
+        let endCheckAnim = SKAction.sequence([ move2, wait4me, moveBack2])
+        if whatsGoing == true{
+            youWinScreen.runAction(endCheckAnim)
+            print("timetowin")
+            menuDeletion()
+        }else{
+            youLoseScreen.runAction(endCheckAnim)
+            print("timetolose")
+            menuDeletion()
+        }
         
-        let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
-        theArrow.runAction(arrowForward)
+        
+        //let arrowForward = SKAction.resizeToHeight(500, duration: 8.0)
+        //theArrow.runAction(arrowForward)
     }
     
     func gameIsEnded(){
