@@ -33,6 +33,9 @@ class GameScene: SKScene {
     var ARRT = 0
     var winCount = 0
     
+    let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    
     var circleOne: SKSpriteNode!
     var circleTwo: SKSpriteNode!
     var theCircle: SKSpriteNode!
@@ -256,87 +259,61 @@ class GameScene: SKScene {
     func checkWinOrLose(){
         //easy wintest code
         // normalizeRotationDict()
-        
-        for ring in 0...numRingCounterForLevel - 1{
-            let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
-            let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
-            
-            //            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
-            //                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
-            //                self.RotationDict["currentCircleNum_0"] = newCurNum
-            //            }
-            
-            let arrayOfCircles = Levels.infoForLevels[levelClicked]
-            let currentCircle = arrayOfCircles[ring]
-            let nextCircle = arrayOfCircles[ring + 1]
-            
-            let pMoveOne = currentCircle.sMoves
-            let pMoveTwo = nextCircle.sMoves
-            // print("\(ringRotOne) next \(ringRotTwo)")
-            if pMoveOne == 1{
-                self.ARRO = ringRotOne! % 12
-            }else{
-                self.ARRO = 12 - ringRotOne! % 12
+        if levelClicked != 0{
+            for ring in 0...numRingCounterForLevel - 1{
+                let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
+                let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
+                
+                //            if ringRotOne == self.RotationDict["currentCircleNum_0"]{
+                //                let newCurNum = self.RotationDict["currentCircleNum_0"]! / 2
+                //                self.RotationDict["currentCircleNum_0"] = newCurNum
+                //            }
+                
+                let arrayOfCircles = Levels.infoForLevels[levelClicked]
+                let currentCircle = arrayOfCircles[ring]
+                let nextCircle = arrayOfCircles[ring + 1]
+                
+                let pMoveOne = currentCircle.sMoves
+                let pMoveTwo = nextCircle.sMoves
+                // print("\(ringRotOne) next \(ringRotTwo)")
+                if pMoveOne == 1{
+                    self.ARRO = ringRotOne! % 12
+                }else{
+                    self.ARRO = 12 - ringRotOne! % 12
+                }
+                if pMoveTwo == 1{
+                    self.ARRT = ringRotTwo! % 12
+                }else{
+                    self.ARRT = 12 - ringRotTwo! % 12
+                }
+                // print(RotationDict)
+                
+                print(" does \(ARRO) almost == \(ARRT) ?")
+                if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT {
+                    print("YES")
+                    winCount += 1
+                }else{
+                    print("NO")
+                }
+                
             }
-            if pMoveTwo == 1{
-                self.ARRT = ringRotTwo! % 12
+            if numRingCounterForLevel - winCount == 0 {
+                print("\(winCount) won out of \(numRingCounterForLevel)")
+                print("WE WON!!!")
+                winCount = 0
+                winAnimation()
+                gameIsEnded()
             }else{
-                self.ARRT = 12 - ringRotTwo! % 12
+                print("\(winCount) won out of \(numRingCounterForLevel)")
+                print("better luck next time")
+                winCount = 0
+                gameState = .GameOver
+                runCheckState()
             }
-            // print(RotationDict)
-            
-            print(" does \(ARRO) almost == \(ARRT) ?")
-            if ARRO == ARRT || ARRO + 1 == ARRT || ARRO - 1 == ARRT {
-                print("YES")
-                winCount += 1
-            }else{
-                print("NO")
-            }
-            
-        }
-        if numRingCounterForLevel - winCount == 0 {
-            print("\(winCount) won out of \(numRingCounterForLevel)")
-            print("WE WON!!!")
-            winCount = 0
-            winAnimation()
-            gameIsEnded()
         }else{
-            print("\(winCount) won out of \(numRingCounterForLevel)")
-            print("better luck next time")
-            winCount = 0
-            gameState = .GameOver
-            runCheckState()
+            //cannot lose tutorial level 0
+            winAnimation()
         }
-        
-        /*  THIS SHOULD RUN EVERYTIME A RING IS STOPPED
-         
-         let currentRing = (rotationDict[currentRing]number)
-         let arrayOfCirclesToCreate = Levels.infoForLevels[levelClicked]
-         let lastRing = currentRing - 1
-         let avgCurrentRing = currentRing % 6
-         let avgLastRing = lastRing % 6
-         
-         
-         if aRingSMove == 2{
-         finCurrentRing/finLastRing = 6 - avgCurr/lastR
-         }else{
-         fincurrRin/finLastRIn = avgCurr/avgLastR
-         }
-         
-         
-         if finCurrrentRing - finLastRing >= -2 || finCurrentRing - finLastRing = 2{
-         
-         if currentRing = levelCirclesToCreate.count - 1{
-         WIN!
-         }else{
-         continue
-         }
-         }else{
-         
-         loose :'(
-         }
-         
-         */
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -374,6 +351,7 @@ class GameScene: SKScene {
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
         print("You Are On Level \(levelClicked + 1)")
+        
         let numbPixUp = CGFloat(30 * levelClicked)
         print("\(numbPixUp)")
         addChild(pickMe)
@@ -544,6 +522,7 @@ class GameScene: SKScene {
     ////////////////////////////////////////////////////////////////////////////////////
     
     func levelPix(){
+        //to find location of the level picker counter and animate it to move to the next level
         if levelClicked == 0{
             let pixmove = SKAction.moveToY(self.frame.height / 2 - 100, duration: 2)
         }else if levelClicked <= 8{

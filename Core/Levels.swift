@@ -15,37 +15,71 @@ import Foundation
 // rMove = if the direction should be
 //var infoForLevels = [[(rRings: Int, rSpeed: Int, rNibs: Int, rDegrees: Int, rMove: Int)]] ---- array of array of tuple of ints
 class Levels{
-    
+    //high sSpeed = slower
     
     static var infoForLevels = [
+        //tutorial levels
         [
-            (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1)
+            (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1)
+        ],
+        [
+            (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1),
+        ],
+        
+        
+        
+        //2 rings
+        [
+            (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         [
             (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         
+        
+        
+        
+        //three rings
         [
-            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1),
+            (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1),(sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         [
-            (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1),
+            (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1),(sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1),
         ],
         [
-            (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1)
+            (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 2),(sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1),
+        ],
+        
+        
+        
+        //four rings
+        [
+            (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1)
         ],
         [
-            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1)
+            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 2)
         ],
         [
-            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
+            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 2)
+        ],
+        
+        
+        //five rings
+        [
+            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
         ],
         [
-            (sRings: 0, sSpeed: 9, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 8, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
+            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
         ],
         [
-            (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 2)
-        ]
+            (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2)
+        ],
+        [
+            (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 7, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 5, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 6, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 2)
+        ],
+        [
+            (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 3, sNibs: 0, sDegrees: 0, sMoves: 1), (sRings: 0, sSpeed: 2, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 4, sNibs: 0, sDegrees: 0, sMoves: 2), (sRings: 0, sSpeed: 1, sNibs: 0, sDegrees: 0, sMoves: 2)
+        ],
         
     ]
     
