@@ -40,6 +40,8 @@ class GameScene: SKScene {
     //tutorial aids
     let fingerOne = SKSpriteNode(texture: SKTexture(imageNamed: "fing0"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
     let fingerTwo = SKSpriteNode(texture: SKTexture(imageNamed: "fing1"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
+    let tutorialBlockOne = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
+    let tutorialBlockTwo = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
     
     
     //rotation counter aid
@@ -222,7 +224,7 @@ class GameScene: SKScene {
         theLight.alpha = 1.0
         addChild(theLight)
         
-        if levelClicked == 0 {
+        if levelClicked == 0 || levelClicked == 1{
           tutorialOneStart()
         }
         
@@ -308,7 +310,7 @@ class GameScene: SKScene {
     func checkWinOrLose(){
         //easy wintest code
         // normalizeRotationDict()
-        if levelClicked != 0{
+        if levelClicked != 0 {
             for ring in 0...numRingCounterForLevel - 1{
                 let ringRotOne = self.RotationDict["currentCircleNum_\(ring)"]
                 let ringRotTwo = self.RotationDict["currentCircleNum_\(ring + 1)"]
@@ -344,6 +346,11 @@ class GameScene: SKScene {
                 }
                 
             }
+            
+            if levelClicked == 1 {
+                tutorialOneEnd()
+            }
+            
             if numRingCounterForLevel - winCount == 0 {
                 print("\(winCount) won out of \(numRingCounterForLevel)")
                 print("WE WON!!!")
@@ -360,8 +367,9 @@ class GameScene: SKScene {
                 gameState = .GameOver
                 runCheckState()
             }
-        }else{
             
+        }else{
+            tutorialOneEnd()
             whatsGoing = true
             //cannot lose tutorial level 0
             winLoseAnims()
@@ -593,12 +601,26 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
+    func blackOut(){
+        tutorialBlockOne.position.x = self.frame.width * (1 / 32)
+        tutorialBlockOne.position.y = self.frame.height * (31 / 32)
+        tutorialBlockOne.anchorPoint = CGPointMake(0.0, 1.0)
+        tutorialBlockOne.zPosition = 5
+        
+        tutorialBlockTwo.position.x = self.frame.width * (31 / 32)
+        tutorialBlockTwo.position.y = self.frame.height * (1 / 32)
+        tutorialBlockTwo.anchorPoint = CGPointMake(1.0, 0.0)
+        tutorialBlockTwo.zPosition = 5
+        
+        addChild(tutorialBlockOne)
+        addChild(tutorialBlockTwo)
+    }
+    
     func tutorialOneStart(){
         fingerOne.position.x = self.frame.width * ( 3 / 4)
         fingerOne.position.y = self.frame.height * (3 / 5)
         fingerOne.zPosition = 5
         
-        asd
         
         addChild(fingerOne)
         let clickyFinger = SKAction.animateWithTextures([SKTexture(imageNamed: "fing0"), SKTexture(imageNamed: "fing1")], timePerFrame: 0.5)
@@ -758,8 +780,8 @@ class GameScene: SKScene {
         } else {
             self.RotationDict[currentCircleNum] = 1
         }
-    print("\(currentCircleNum) and \(RotationDict)")
-        print("   ")
+   // print("\(currentCircleNum) and \(RotationDict)")
+       //print("   ")
     }
     
     
