@@ -24,7 +24,8 @@ class GameScene: SKScene {
     var theCircleIsSpinning = true
     
     
-    var timer = 60
+    var timer = 200
+    var yourLabel: UILabel = UILabel()
    
     
     var ringsLeftSpinning = 0
@@ -151,6 +152,19 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         print("startup")
+      // asdf
+        
+        yourLabel.frame = CGRectMake(50, 150, 200, 21)
+        yourLabel.backgroundColor = UIColor.clearColor()
+        yourLabel.textColor = UIColor.whiteColor()
+        yourLabel.textAlignment = NSTextAlignment.Center
+        var theSec = String(format: "%02d", timer % 60)
+        var unformatSec = timer % 60
+        var unformatMin = (timer - unformatSec) / 60
+        var theMin = String(format: "%02d", unformatMin)
+        yourLabel.text = "00:\(theMin):\(theSec)"
+        yourLabel.font = UIFont(name: "Menlo", size: 20.0)
+        self.view!.addSubview(yourLabel)
         
         
         pickMe.position.x = self.frame.height / 2 - 200
@@ -632,6 +646,11 @@ class GameScene: SKScene {
     func countdown() {
         timer -= 1
         print("\(timer)")
+        var theSec = String(format: "%02d", timer % 60)
+        var unformatSec = timer % 60
+        var unformatMin = (timer - unformatSec) / 60
+        var theMin = String(format: "%02d", unformatMin)
+        yourLabel.text = "00:\(theMin):\(theSec)"
         if timer == 0{
             print("youFailed")
         }
