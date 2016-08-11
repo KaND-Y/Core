@@ -57,6 +57,9 @@ class GameScene: SKScene {
     var circleTwo: SKSpriteNode!
     var theCircle: SKSpriteNode!
     
+    //blackout aids
+   var blackOutScreen = SKSpriteNode!.self
+    
     //win lose aids
     var circSi = 500
     var wantToEnd = false
@@ -602,6 +605,19 @@ class GameScene: SKScene {
     ////////////////////////////////////////////////////////////////////////////////////
     
     func blackOut(){
+        
+       let  blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width, height: view!.frame.height))
+        let fadeIn = SKAction.runBlock{
+            blackOutScreen.alpha += 0.01
+        }
+        let fadeOut = SKAction.runBlock{
+            blackOutScreen.alpha += 0.01
+        }
+        
+        let fadeInForever = SKAction.repeatActionForever(fadeIn)
+        let fadeOutForever =  SKAction.repeatActionForever(fadeOut)
+asdfasdfasdfasdf
+        
         tutorialBlockOne.position.x = self.frame.width * (1 / 32)
         tutorialBlockOne.position.y = self.frame.height * (31 / 32)
         tutorialBlockOne.anchorPoint = CGPointMake(0.0, 1.0)
