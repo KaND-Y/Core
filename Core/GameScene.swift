@@ -12,7 +12,7 @@ import AVFoundation
 /////////////////////////// START! ///////////////////////////
 
 enum GameSceneState {
-    case PlayGame, CheckingWinOrLose, GameOver, CheckingLevels, Pause, Home
+    case PlayGame, CheckingWinOrLose, GameOver, CheckingLevels, Pause, Home, Intro
 }
 
 class GameScene: SKScene {
@@ -22,6 +22,10 @@ class GameScene: SKScene {
     var circleOneIsSpinning = true
     var circleTwoIsSpinning = true
     var theCircleIsSpinning = true
+    
+    
+    var timer = 60
+   
     
     var ringsLeftSpinning = 0
     
@@ -98,6 +102,8 @@ class GameScene: SKScene {
     let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
+    let skipButton = SKSpriteNode(texture: SKTexture(imageNamed: "SButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    
     
     let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
     
@@ -117,7 +123,7 @@ class GameScene: SKScene {
     var CurrentSpriteData = [String: SKSpriteNode]()
     
     
-    var gameState: GameSceneState = .Home
+    var gameState: GameSceneState = .Intro
     
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////// basic functions start here //////////////////////////
@@ -138,6 +144,8 @@ class GameScene: SKScene {
             weAreOnTheCheckingLevelsPage()
         case .Pause:
             weAreOnThePausePage()
+        case .Intro:
+            weAreOnTheIntroPage()
         }
     }
     
@@ -205,6 +213,10 @@ class GameScene: SKScene {
         homeButton.position.x = view.frame.width / 5
         homeButton.position.y = view.frame.height * (1 / 8)
         homeButton.zPosition = 4
+        skipButton.position.x = view.frame.width * (4 / 5)
+        skipButton.position.y = view.frame.height * (1 / 8)
+        skipButton.zPosition = 7
+        
         
         titleTXT.position.x = view.frame.width / 2
         titleTXT.position.y = view.frame.height * (7 / 8)
@@ -383,12 +395,27 @@ class GameScene: SKScene {
     ///////////////////////////////////////////////////////////////////////////
     //////////////////////  what to do per gamestate.......  //////////////////
     ///////////////////////////////////////////////////////////////////////////
+    func weAreOnTheIntroPage(){
+        print("we are on the \(gameState) page")
+        addChild(skipButton)
+        createIntroAnimation()
+        createBackgroundAnimation()
+        
+    }
+    
+    func weAreLeavingTheIntroPage(){
+        skipButton.removeFromParent()
+        fadeTransitionOut()
+    }
     
     func weAreOnTheHomePage(){
         print("we are on the \(gameState) page")
         addChild(levelButton)
         addChild(titleTXT)
         createBackgroundAnimation()
+        countdown()
+        var clock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
+        
         
         
     }
@@ -426,8 +453,6 @@ class GameScene: SKScene {
         addChild(playButton)
         addChild(anotherLevelButton)
         createBackgroundAnimation()
-       
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////***
         levelPix()
         pickMe.zPosition = 2
         
@@ -604,7 +629,20 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
-    func asdf(){
+    func countdown() {
+        timer -= 1
+        print("\(timer)")
+        if timer == 0{
+            print("youFailed")
+        }
+    }
+    
+    func createIntroAnimation(){
+        blackOut()
+    }
+
+    
+    func blackOut(){
         
        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.zPosition = 5
@@ -634,7 +672,7 @@ class GameScene: SKScene {
             blackOutScreen.runAction(SKAction.fadeOutWithDuration(2))
         }
     }
-    func blackOut(){
+    func fadeTransitionIn(){
         
         let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.zPosition = 5
@@ -643,16 +681,26 @@ class GameScene: SKScene {
         
         
         let One = SKAction.fadeInWithDuration(0.25)
-        let Two = SKAction.waitForDuration(1)
-        let TTwo = SKAction.runBlock{
-            self.runAction(Two)
-        }
-        let Three = SKAction.fadeOutWithDuration(0.25)
-        let sequence = SKAction.sequence([One, Two, Three])
+        let Two = SKAction.waitForDuration(0.5)
+ 
+        let sequence = SKAction.sequence([One, Two])
         blackOutScreen.runAction(sequence)
         
-       
-
+    }
+    func fadeTransitionOut(){
+        
+        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        blackOutScreen.alpha = 1.0
+        blackOutScreen.zPosition = 5
+       // blackOutScreen.alpha = 0.0
+        addChild(blackOutScreen)
+        
+        
+        let Two = SKAction.waitForDuration(0.5)
+        
+        let Three = SKAction.fadeOutWithDuration(0.25)
+        let sequence = SKAction.sequence([Two, Three])
+        blackOutScreen.runAction(sequence)
     }
     
    
@@ -902,7 +950,18 @@ class GameScene: SKScene {
                 }
             }
         }
-        if gameState == .PlayGame{
+        else if gameState == .Intro{
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButtonx")
+                }else{
+                    
+                }
+            }
+        }
+        else if gameState == .PlayGame{
             
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
@@ -973,7 +1032,14 @@ class GameScene: SKScene {
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                 }
             }
-            if gameState == .PlayGame{
+            else if gameState == .Intro{
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButtonx")
+                } else{
+                    skipButton.texture = SKTexture(imageNamed:"SButton")
+                }
+            }
+            else if gameState == .PlayGame{
                 if pauseButton.containsPoint(location) {
                     pauseButton.texture = SKTexture(imageNamed:"PButtonx")
                 } else{
@@ -1058,7 +1124,21 @@ class GameScene: SKScene {
                 }
             }
         }
-        if gameState == .PlayGame{
+        else if gameState == .Intro {
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButton")
+                    weAreLeavingTheIntroPage()
+                    
+                    gameState = .Home
+                    runCheckState()
+                    
+                }
+            }
+        }
+       else if gameState == .PlayGame{
             
             
             
