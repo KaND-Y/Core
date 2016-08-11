@@ -604,39 +604,62 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
-    func blackOut(){
+    func asdf(){
         
-       let  blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width, height: view!.frame.height))
-        let fadeIn = SKAction.runBlock{
-            blackOutScreen.alpha += 0.01
-        }
-        let fadeOut = SKAction.runBlock{
-            blackOutScreen.alpha += 0.01
-        }
-        
-        let fadeInForever = SKAction.repeatActionForever(fadeIn)
-        let fadeOutForever =  SKAction.repeatActionForever(fadeOut)
-asdfasdfasdfasdf
+       let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        blackOutScreen.zPosition = 5
+        blackOutScreen.alpha = 0.0
+        addChild(blackOutScreen)
         
         tutorialBlockOne.position.x = self.frame.width * (1 / 32)
         tutorialBlockOne.position.y = self.frame.height * (31 / 32)
         tutorialBlockOne.anchorPoint = CGPointMake(0.0, 1.0)
-        tutorialBlockOne.zPosition = 5
+        tutorialBlockOne.zPosition = 6
         
         tutorialBlockTwo.position.x = self.frame.width * (31 / 32)
         tutorialBlockTwo.position.y = self.frame.height * (1 / 32)
         tutorialBlockTwo.anchorPoint = CGPointMake(1.0, 0.0)
-        tutorialBlockTwo.zPosition = 5
+        tutorialBlockTwo.zPosition = 6
         
-        addChild(tutorialBlockOne)
-        addChild(tutorialBlockTwo)
+        blackOutScreen.runAction(SKAction.fadeInWithDuration(2)) {
+            self.runAction(SKAction.waitForDuration(6))
+            self.addChild(self.tutorialBlockOne)
+            self.addChild(self.tutorialBlockTwo)
+            self.runAction(SKAction.waitForDuration(6))
+        }
+        self.runAction(SKAction.waitForDuration(8)){
+            self.tutorialBlockOne.removeFromParent()
+             self.tutorialBlockTwo.removeFromParent()
+             self.runAction(SKAction.waitForDuration(6))
+            blackOutScreen.runAction(SKAction.fadeOutWithDuration(2))
+        }
+    }
+    func blackOut(){
+        
+        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        blackOutScreen.zPosition = 5
+        blackOutScreen.alpha = 0.0
+        addChild(blackOutScreen)
+        
+        
+        let One = SKAction.fadeInWithDuration(0.25)
+        let Two = SKAction.waitForDuration(1)
+        let TTwo = SKAction.runBlock{
+            self.runAction(Two)
+        }
+        let Three = SKAction.fadeOutWithDuration(0.25)
+        let sequence = SKAction.sequence([One, Two, Three])
+        blackOutScreen.runAction(sequence)
+        
+       
+
     }
     
+   
     func tutorialOneStart(){
         fingerOne.position.x = self.frame.width * ( 3 / 4)
         fingerOne.position.y = self.frame.height * (3 / 5)
         fingerOne.zPosition = 5
-        
         
         addChild(fingerOne)
         let clickyFinger = SKAction.animateWithTextures([SKTexture(imageNamed: "fing0"), SKTexture(imageNamed: "fing1")], timePerFrame: 0.5)
@@ -728,6 +751,8 @@ asdfasdfasdfasdf
         if whatsGoing == true{
             youWinScreen.runAction(endCheckAnim)
             print("timetowin")
+            blackOut()
+    ///////////////////////////////////////////////////////////
            
         }else{
             youLoseScreen.runAction(endCheckAnim)
