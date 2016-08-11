@@ -33,6 +33,9 @@ class GameScene: SKScene {
     var ARRT = 0
     var winCount = 0
     
+    
+    let const = CGFloat(12)
+    
     let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     var whatsGoing = false
@@ -201,8 +204,10 @@ class GameScene: SKScene {
             
             let rSpeedIs = arrayOfCircleToCreate.sSpeed
             let rSpeed = Double(rSpeedIs)
-            let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
-            let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
+            
+            //gotohere
+            let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
+            let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
             
             
             if circleNumber == 0 {
@@ -284,15 +289,18 @@ class GameScene: SKScene {
                 let pMoveOne = currentCircle.sMoves
                 let pMoveTwo = nextCircle.sMoves
                 // print("\(ringRotOne) next \(ringRotTwo)")
+    ////////////////////////////////////////////////////////////////////////////////////////
+                
                 if pMoveOne == 1{
-                    self.ARRO = ringRotOne! % 12
+                    self.ARRO = ringRotOne! % Int(const)
+                    
                 }else{
-                    self.ARRO = 12 - ringRotOne! % 12
+                    self.ARRO = Int(const) - ringRotOne! % Int(const)
                 }
                 if pMoveTwo == 1{
-                    self.ARRT = ringRotTwo! % 12
+                    self.ARRT = ringRotTwo! % Int(const)
                 }else{
-                    self.ARRT = 12 - ringRotTwo! % 12
+                    self.ARRT = Int(const) - ringRotTwo! % Int(const)
                 }
                 // print(RotationDict)
                 
@@ -554,6 +562,8 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
+    
+    
     func levelPix(){
         //to find location of the level picker counter and animate it to move to the next level
         if levelClicked == 0{
@@ -701,7 +711,8 @@ class GameScene: SKScene {
         } else {
             self.RotationDict[currentCircleNum] = 1
         }
-        //print("\(currentCircleNum) and \(RotationDict)")
+    print("\(currentCircleNum) and \(RotationDict)")
+        print("   ")
     }
     
     
@@ -1064,8 +1075,10 @@ class GameScene: SKScene {
                         let sprite = CurrentSpriteData["theCircle\(circleNumber)"]
                         let rSpeedIs = arrayOfCircleToCreate.sSpeed
                         let rSpeed = Double(rSpeedIs)
-                        let rotate = SKAction.rotateByAngle(CGFloat(M_PI) / 12, duration: rSpeed / 16)
-                        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) / -12, duration: rSpeed / 16)
+                        
+        //////////////////////////////////////////////////////////////////////////////////
+                        let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
+                        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
                         let currentCircleNum = "currentCircleNum_\(circleNumber)"
                         
                         let updateDegreeCounter = SKAction.runBlock{
