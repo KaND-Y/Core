@@ -25,47 +25,69 @@ class GameScene: SKScene {
     
     var ringsLeftSpinning = 0
     
+    
+    //level detection aids
     var levelClicked = 0
     var forba = 1
     var ALBTouch = 0
     
+    //win aids
     var ARRO = 0
     var ARRT = 0
     var winCount = 0
     
     
+    //tutorial aids
+    let fingerOne = SKSpriteNode(texture: SKTexture(imageNamed: "fing0"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
+    let fingerTwo = SKSpriteNode(texture: SKTexture(imageNamed: "fing1"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
+    
+    
+    //rotation counter aid
     let const = CGFloat(12)
     
+    //win lose aids
     let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     var whatsGoing = false
     
-    
+    //test aids
     var circleOne: SKSpriteNode!
     var circleTwo: SKSpriteNode!
     var theCircle: SKSpriteNode!
     
+    //win lose aids
     var circSi = 500
     var wantToEnd = false
     let bCircYea = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 0, height: 0))
     
+    
+    //menu aids
     let menu0 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau0"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let menu1 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau1"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let menu2 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau2"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let menu3 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau3"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     let menu4 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau4"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
     
+    
+    
     var pixmove: SKAction!
     
+    //rotation aids
     var rotateForever: SKAction!
     var rotatecircleTwoForever: SKAction!
     
+    
+    //pause screen aids
     var loaderScreen: SKSpriteNode!
     var backgroundScreen: SKSpriteNode!
     
+    
+    //audio aids
     var backgroundSFX: AVAudioPlayer!
     let clickSound = SKAction.playSoundFileNamed("lockMeTwo", waitForCompletion: false)
     
+    
+    //button aids
     let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
     let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
@@ -75,9 +97,14 @@ class GameScene: SKScene {
     let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
     
     
+    
+    //msc aids
     let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 180))
     var theArrow: SKSpriteNode!
     
+    
+    
+    //lists aids
     let arrayOfCircleImages = ["blackRingSetOne", "blackRingSetTwo", "blackRingSetThree", "blackRingSetFour", "blackRingSetFive"]
     let arrayOfNibImages = ["blackNibSetOne", "blackNibSetTwo", "blackNibSetThree", "blackNibSetFour", "blackNibSetFive"]
     
@@ -194,6 +221,10 @@ class GameScene: SKScene {
         theLight.zPosition = 1
         theLight.alpha = 1.0
         addChild(theLight)
+        
+        if levelClicked == 0 {
+          tutorialOneStart()
+        }
         
         
         for circleNumber in 0...numRingCounterForLevel {
@@ -562,7 +593,23 @@ class GameScene: SKScene {
     //////////////////////////////  helper functions ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
+    func tutorialOneStart(){
+        fingerOne.position.x = self.frame.width * ( 3 / 4)
+        fingerOne.position.y = self.frame.height * (3 / 5)
+        fingerOne.zPosition = 5
+        
+        asd
+        
+        addChild(fingerOne)
+        let clickyFinger = SKAction.animateWithTextures([SKTexture(imageNamed: "fing0"), SKTexture(imageNamed: "fing1")], timePerFrame: 0.5)
+        let clickyFingerForever = SKAction.repeatActionForever(clickyFinger)
+        fingerOne.runAction(clickyFingerForever)
+    }
     
+    func tutorialOneEnd(){
+        fingerOne.removeAllActions()
+        fingerOne.removeFromParent()
+    }
     
     func levelPix(){
         //to find location of the level picker counter and animate it to move to the next level
