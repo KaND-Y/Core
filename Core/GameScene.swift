@@ -12,7 +12,7 @@ import AVFoundation
 /////////////////////////// START! ///////////////////////////
 
 enum GameSceneState {
-    case PlayGame, CheckingWinOrLose, GameOver, CheckingLevels, Pause, Home, Intro
+    case PlayGame, CheckingWinOrLose, GameOver, CheckingLevels, Pause, Home, Intro, IntroPlay
 }
 
 class GameScene: SKScene {
@@ -147,6 +147,8 @@ class GameScene: SKScene {
             weAreOnThePausePage()
         case .Intro:
             weAreOnTheIntroPage()
+        case .IntroPlay:
+            weAreOnTheIntroPlayPage()
         }
     }
     
@@ -405,9 +407,9 @@ class GameScene: SKScene {
             winLoseAnims()
             //gameIsEnded()
             levelClicked = 1
-            gameState = .PlayGame
+            gameState = .Intro
+            runCheckState()
             
-            loadGameLevelSelected()
             print ("WWWWWWWWWWWWWWWWWW")
             
         }
@@ -427,6 +429,18 @@ class GameScene: SKScene {
     func weAreLeavingTheIntroPage(){
         skipButton.removeFromParent()
         fadeTransitionOut()
+    }
+    
+    func weAreOnTheIntroPlayPage(){
+        print("we are on the \(gameState) page")
+        //testLevel()
+        loadGameLevelSelected()
+        addChild(skipButton)
+        createBackgroundAnimation()
+    }
+    
+    func weAreLeavingTheIntroPlayPage(){
+        skipButton.removeFromParent()
     }
     
     func weAreOnTheHomePage(){
@@ -667,13 +681,16 @@ class GameScene: SKScene {
     }
     
     func createIntroAnimation(){
-        blackOut()
-        levelClicked = 0
-        gameState = .PlayGame
-        loadGameLevelSelected()
-        
+        let blackout = SKAction.runBlock{
+            self.blackOut()
+        }
+        let introcheckstate = SKAction.runBlock{
+            self.gameState = .IntroPlay
+            self.loadGameLevelSelected()
+        }
+        let introSequence = SKAction.sequence([blackout, SKAction.waitForDuration(11), introcheckstate])
+        self.runAction(introSequence)
     }
-    
     
     func blackOut(){
         
@@ -681,6 +698,9 @@ class GameScene: SKScene {
         blackOutScreen.zPosition = 5
         blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
+        
+        
+        //////////////////////////////////////////////////////////////////////// if statement for tutorial block texure for text
         
         tutorialBlockOne.position.x = self.frame.width * (1 / 32)
         tutorialBlockOne.position.y = self.frame.height * (31 / 32)
@@ -995,8 +1015,18 @@ class GameScene: SKScene {
                 }
             }
         }
-        else if gameState == .PlayGame{
+        else if gameState == .IntroPlay{
             
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButtonx")
+                }else{
+                    
+                }
+            }
+        }
+        else if gameState == .PlayGame{
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if pauseButton.containsPoint(location) {
@@ -1054,6 +1084,7 @@ class GameScene: SKScene {
         }
     }
     
+    
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //apologies for such redunant code :'(
         for touch: AnyObject in touches {
@@ -1067,6 +1098,13 @@ class GameScene: SKScene {
                 }
             }
             else if gameState == .Intro{
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButtonx")
+                } else{
+                    skipButton.texture = SKTexture(imageNamed:"SButton")
+                }
+            }
+            else if gameState == .IntroPlay{
                 if skipButton.containsPoint(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButtonx")
                 } else{
@@ -1172,10 +1210,47 @@ class GameScene: SKScene {
                 }
             }
         }
+        else if gameState == .IntroPlay {
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                if skipButton.containsPoint(location) {
+                    skipButton.texture = SKTexture(imageNamed:"SButton")
+                    weAreLeavingTheIntroPage()
+                    
+                    gameState = .Home
+                    runCheckState()
+                    
+                }else{
+                    self.runAction(clickSound)
+                    // testTouch()
+                    // testTouchTwo()
+                    
+                    if levelClicked == 0{
+                        CurrentSpriteData["theCircle\(numRingCounterForLevel - ringsLeftSpinning)"]!.removeAllActions()
+                        theArrow.removeAllActions()
+                        ringsLeftSpinning -= 1
+                        if ringsLeftSpinning <= -1 {
+                            gameState = .CheckingWinOrLose
+                            runCheckState()
+                        }
+                    }else if levelClicked == 1{
+                        CurrentSpriteData["theCircle\(numRingCounterForLevel - ringsLeftSpinning)"]!.removeAllActions()
+                        if numRingCounterForLevel == ringsLeftSpinning {
+                            theArrow.removeAllActions()
+                        }
+                        ringsLeftSpinning -= 1
+                        if ringsLeftSpinning <= -1 {
+                            gameState = .CheckingWinOrLose
+                            runCheckState()
+                        }
+                    }else{
+                        //should not happen
+                    }
+                }
+            }
+        }
         else if gameState == .PlayGame{
-            
-            
-            
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 if pauseButton.containsPoint(location) {

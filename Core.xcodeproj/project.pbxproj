@@ -15,10 +15,10 @@
 		B312FD271D59584A00C2249E /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312FD261D59584A00C2249E /* CoreTests.swift */; };
 		B312FD321D59584A00C2249E /* CoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312FD311D59584A00C2249E /* CoreUITests.swift */; };
 		B312FD401D59589200C2249E /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312FD3F1D59589200C2249E /* Levels.swift */; };
-		B312FD421D595A2400C2249E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B312FD411D595A2400C2249E /* Assets.xcassets */; };
 		B312FD471D595A3F00C2249E /* fromInside.caf in Resources */ = {isa = PBXBuildFile; fileRef = B312FD441D595A3F00C2249E /* fromInside.caf */; };
 		B312FD481D595A3F00C2249E /* lockMe.caf in Resources */ = {isa = PBXBuildFile; fileRef = B312FD451D595A3F00C2249E /* lockMe.caf */; };
 		B312FD491D595A3F00C2249E /* lockMeTwo.caf in Resources */ = {isa = PBXBuildFile; fileRef = B312FD461D595A3F00C2249E /* lockMeTwo.caf */; };
+		B379EE891D5E448600C1696A /* myAssets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B379EE881D5E448600C1696A /* myAssets.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +53,10 @@
 		B312FD311D59584A00C2249E /* CoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreUITests.swift; sourceTree = "<group>"; };
 		B312FD331D59584A00C2249E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B312FD3F1D59589200C2249E /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
-		B312FD411D595A2400C2249E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B312FD441D595A3F00C2249E /* fromInside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fromInside.caf; sourceTree = "<group>"; };
 		B312FD451D595A3F00C2249E /* lockMe.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMe.caf; sourceTree = "<group>"; };
 		B312FD461D595A3F00C2249E /* lockMeTwo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMeTwo.caf; sourceTree = "<group>"; };
+		B379EE881D5E448600C1696A /* myAssets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = myAssets.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +110,8 @@
 				B312FD0D1D59584A00C2249E /* AppDelegate.swift */,
 				B312FD111D59584A00C2249E /* GameScene.swift */,
 				B312FD3F1D59589200C2249E /* Levels.swift */,
+				B379EE881D5E448600C1696A /* myAssets.atlas */,
 				B312FD131D59584A00C2249E /* GameViewController.swift */,
-				B312FD411D595A2400C2249E /* Assets.xcassets */,
 				B312FD431D595A3F00C2249E /* SFX */,
 				B312FD151D59584A00C2249E /* Main.storyboard */,
 				B312FD1A1D59584A00C2249E /* LaunchScreen.storyboard */,
@@ -254,8 +254,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B312FD1C1D59584A00C2249E /* LaunchScreen.storyboard in Resources */,
-				B312FD421D595A2400C2249E /* Assets.xcassets in Resources */,
 				B312FD471D595A3F00C2249E /* fromInside.caf in Resources */,
+				B379EE891D5E448600C1696A /* myAssets.atlas in Resources */,
 				B312FD481D595A3F00C2249E /* lockMe.caf in Resources */,
 				B312FD491D595A3F00C2249E /* lockMeTwo.caf in Resources */,
 				B312FD171D59584A00C2249E /* Main.storyboard in Resources */,
