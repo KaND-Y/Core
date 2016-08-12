@@ -24,9 +24,9 @@ class GameScene: SKScene {
     var theCircleIsSpinning = true
     
     
-    var timer = 200
+    var timer = 70
     var yourLabel: UILabel = UILabel()
-   
+    
     
     var ringsLeftSpinning = 0
     
@@ -63,7 +63,7 @@ class GameScene: SKScene {
     var theCircle: SKSpriteNode!
     
     //blackout aids
-   var blackOutScreen = SKSpriteNode!.self
+    var blackOutScreen = SKSpriteNode!.self
     
     //win lose aids
     var circSi = 500
@@ -152,8 +152,8 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         print("startup")
-      // asdf
-        
+        // asdf
+        var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
         yourLabel.frame = CGRectMake(50, 150, 200, 21)
         yourLabel.backgroundColor = UIColor.clearColor()
         yourLabel.textColor = UIColor.whiteColor()
@@ -165,6 +165,9 @@ class GameScene: SKScene {
         yourLabel.text = "00:\(theMin):\(theSec)"
         yourLabel.font = UIFont(name: "Menlo", size: 20.0)
         self.view!.addSubview(yourLabel)
+        
+        
+        
         
         
         pickMe.position.x = self.frame.height / 2 - 200
@@ -254,7 +257,7 @@ class GameScene: SKScene {
         addChild(theLight)
         
         if levelClicked == 0 || levelClicked == 1{
-          tutorialOneStart()
+            tutorialOneStart()
         }
         
         
@@ -351,7 +354,7 @@ class GameScene: SKScene {
                 let pMoveOne = currentCircle.sMoves
                 let pMoveTwo = nextCircle.sMoves
                 // print("\(ringRotOne) next \(ringRotTwo)")
-    ////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////
                 
                 if pMoveOne == 1{
                     self.ARRO = ringRotOne! % Int(const)
@@ -376,11 +379,8 @@ class GameScene: SKScene {
                 
             }
             
-            if levelClicked == 1 {
-                tutorialOneEnd()
-            }
-            
             if numRingCounterForLevel - winCount == 0 {
+                
                 print("\(winCount) won out of \(numRingCounterForLevel)")
                 print("WE WON!!!")
                 whatsGoing = true
@@ -400,9 +400,16 @@ class GameScene: SKScene {
         }else{
             tutorialOneEnd()
             whatsGoing = true
+            quitCurrentLevel()
             //cannot lose tutorial level 0
             winLoseAnims()
-            gameIsEnded()
+            //gameIsEnded()
+            levelClicked = 1
+            gameState = .PlayGame
+            
+            loadGameLevelSelected()
+            print ("WWWWWWWWWWWWWWWWWW")
+            
         }
     }
     
@@ -428,8 +435,7 @@ class GameScene: SKScene {
         addChild(titleTXT)
         createBackgroundAnimation()
         countdown()
-        var clock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
-        
+        //////////////////////////////////////////////////////////////////
         
         
     }
@@ -456,11 +462,12 @@ class GameScene: SKScene {
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
         if levelClicked > 14{
-            levelClicked = 0
+            levelClicked = 2
+            //donot replay tutorial levels
         }
         print("You Are On Level \(levelClicked + 1)")
         
-     
+        
         
         
         addChild(homeButton)
@@ -652,18 +659,25 @@ class GameScene: SKScene {
         var theMin = String(format: "%02d", unformatMin)
         yourLabel.text = "00:\(theMin):\(theSec)"
         if timer == 0{
-            print("youFailed")
+            ////////////////////////////////////////////////////////////////////////
+            yourLabel.removeFromSuperview()
+            var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
+            myClock.invalidate()
         }
     }
     
     func createIntroAnimation(){
         blackOut()
+        levelClicked = 0
+        gameState = .PlayGame
+        loadGameLevelSelected()
+        
     }
-
+    
     
     func blackOut(){
         
-       let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.zPosition = 5
         blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
@@ -686,8 +700,8 @@ class GameScene: SKScene {
         }
         self.runAction(SKAction.waitForDuration(8)){
             self.tutorialBlockOne.removeFromParent()
-             self.tutorialBlockTwo.removeFromParent()
-             self.runAction(SKAction.waitForDuration(6))
+            self.tutorialBlockTwo.removeFromParent()
+            self.runAction(SKAction.waitForDuration(6))
             blackOutScreen.runAction(SKAction.fadeOutWithDuration(2))
         }
     }
@@ -701,7 +715,7 @@ class GameScene: SKScene {
         
         let One = SKAction.fadeInWithDuration(0.25)
         let Two = SKAction.waitForDuration(0.5)
- 
+        
         let sequence = SKAction.sequence([One, Two])
         blackOutScreen.runAction(sequence)
         
@@ -711,7 +725,7 @@ class GameScene: SKScene {
         let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.alpha = 1.0
         blackOutScreen.zPosition = 5
-       // blackOutScreen.alpha = 0.0
+        // blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
         
         
@@ -722,7 +736,7 @@ class GameScene: SKScene {
         blackOutScreen.runAction(sequence)
     }
     
-   
+    
     func tutorialOneStart(){
         fingerOne.position.x = self.frame.width * ( 3 / 4)
         fingerOne.position.y = self.frame.height * (3 / 5)
@@ -819,8 +833,8 @@ class GameScene: SKScene {
             youWinScreen.runAction(endCheckAnim)
             print("timetowin")
             blackOut()
-    ///////////////////////////////////////////////////////////
-           
+            ///////////////////////////////////////////////////////////
+            
         }else{
             youLoseScreen.runAction(endCheckAnim)
             print("timetolose")
@@ -841,7 +855,8 @@ class GameScene: SKScene {
         if 0 <= levelClicked && levelClicked <= 14{
             levelClicked += 1
         }else{
-            levelClicked = 0
+            levelClicked = 2
+            ///donot play tutorial Level Again
         }
         gameState = .CheckingLevels
         runCheckState()
@@ -888,8 +903,8 @@ class GameScene: SKScene {
         } else {
             self.RotationDict[currentCircleNum] = 1
         }
-   // print("\(currentCircleNum) and \(RotationDict)")
-       //print("   ")
+        // print("\(currentCircleNum) and \(RotationDict)")
+        //print("   ")
     }
     
     
@@ -1157,7 +1172,7 @@ class GameScene: SKScene {
                 }
             }
         }
-       else if gameState == .PlayGame{
+        else if gameState == .PlayGame{
             
             
             
@@ -1285,7 +1300,7 @@ class GameScene: SKScene {
                         let rSpeedIs = arrayOfCircleToCreate.sSpeed
                         let rSpeed = Double(rSpeedIs)
                         
-        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
                         let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
                         let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
                         let currentCircleNum = "currentCircleNum_\(circleNumber)"
