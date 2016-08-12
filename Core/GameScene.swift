@@ -43,10 +43,11 @@ class GameScene: SKScene {
     
     
     //tutorial aids
+    var tutorialCounter = 1
     let fingerOne = SKSpriteNode(texture: SKTexture(imageNamed: "fing0"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
     let fingerTwo = SKSpriteNode(texture: SKTexture(imageNamed: "fing1"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
-    let tutorialBlockOne = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
-    let tutorialBlockTwo = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
+    let tutorialBlockOne = SKSpriteNode(texture: SKTexture(imageNamed: "text1"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
+    let tutorialBlockTwo = SKSpriteNode(texture: SKTexture(imageNamed: "text2"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
     
     
     //rotation counter aid
@@ -63,7 +64,8 @@ class GameScene: SKScene {
     var theCircle: SKSpriteNode!
     
     //blackout aids
-    var blackOutScreen = SKSpriteNode!.self
+    var blackOutScreen: SKSpriteNode!
+    
     
     //win lose aids
     var circSi = 500
@@ -168,9 +170,7 @@ class GameScene: SKScene {
         yourLabel.font = UIFont(name: "Menlo", size: 20.0)
         self.view!.addSubview(yourLabel)
         
-        
-        
-        
+        //
         
         pickMe.position.x = self.frame.height / 2 - 200
         pickMe.position.y = self.frame.height / 2 - 150
@@ -388,15 +388,29 @@ class GameScene: SKScene {
                 whatsGoing = true
                 winCount = 0
                 winLoseAnims()
-                gameIsEnded()
+                if levelClicked != 1{
+                   gameIsEnded()
+                }else{
+                    fingerOne.removeFromParent()
+                    createIntroAnimation()
+                    quitCurrentLevel()
+                }
+                
             }else{
                 print("\(winCount) won out of \(numRingCounterForLevel)")
                 print("better luck next time")
                 whatsGoing = false
                 winLoseAnims()
                 winCount = 0
-                gameState = .GameOver
-                runCheckState()
+                if levelClicked != 1{
+                    gameState = .GameOver
+                    runCheckState()
+                }else{
+                    tutorialCounter = 2
+                    quitCurrentLevel()
+                    fingerOne.removeFromParent()
+                    createIntroAnimation()
+                }
             }
             
         }else{
@@ -685,11 +699,16 @@ class GameScene: SKScene {
             self.blackOut()
         }
         let introcheckstate = SKAction.runBlock{
+            self.weAreLeavingTheIntroPage()
             self.gameState = .IntroPlay
             self.loadGameLevelSelected()
         }
         let introSequence = SKAction.sequence([blackout, SKAction.waitForDuration(11), introcheckstate])
-        self.runAction(introSequence)
+        if tutorialCounter == 3 {
+            self.runAction(blackout)
+        }else{
+            self.runAction(introSequence)
+        }
     }
     
     func blackOut(){
@@ -700,6 +719,19 @@ class GameScene: SKScene {
         addChild(blackOutScreen)
         
         
+        print("Tutroial Counter: \(tutorialCounter)")
+        
+        if tutorialCounter == 1{
+            tutorialBlockOne.texture = SKTexture(imageNamed: "text1")
+            tutorialBlockTwo.texture = SKTexture(imageNamed: "text2")
+        } else if tutorialCounter == 2{
+            tutorialBlockOne.texture = SKTexture(imageNamed: "text3")
+            tutorialBlockTwo.texture = SKTexture(imageNamed: "text6")
+        } else if tutorialCounter == 3{
+            tutorialBlockOne.texture = SKTexture(imageNamed: "text4")
+            tutorialBlockTwo.texture = SKTexture(imageNamed: "text5")
+        }
+        
         //////////////////////////////////////////////////////////////////////// if statement for tutorial block texure for text
         
         tutorialBlockOne.position.x = self.frame.width * (1 / 32)
@@ -708,21 +740,51 @@ class GameScene: SKScene {
         tutorialBlockOne.zPosition = 6
         
         tutorialBlockTwo.position.x = self.frame.width * (31 / 32)
-        tutorialBlockTwo.position.y = self.frame.height * (1 / 32)
+        tutorialBlockTwo.position.y = self.frame.height * (6 / 32)
         tutorialBlockTwo.anchorPoint = CGPointMake(1.0, 0.0)
         tutorialBlockTwo.zPosition = 6
         
-        blackOutScreen.runAction(SKAction.fadeInWithDuration(2)) {
-            self.runAction(SKAction.waitForDuration(6))
+        blackOutScreen.runAction(SKAction.fadeInWithDuration(2))
+        
+        let Block1 =  SKAction.runBlock{
             self.addChild(self.tutorialBlockOne)
-            self.addChild(self.tutorialBlockTwo)
-            self.runAction(SKAction.waitForDuration(6))
         }
-        self.runAction(SKAction.waitForDuration(8)){
+        
+        let Block2 = SKAction.runBlock{
+            self.addChild(self.tutorialBlockTwo)
+        }
+        
+        let UndoBlock1 =  SKAction.runBlock{
             self.tutorialBlockOne.removeFromParent()
+        }
+        
+        let UndoBlock2 = SKAction.runBlock{
             self.tutorialBlockTwo.removeFromParent()
-            self.runAction(SKAction.waitForDuration(6))
-            blackOutScreen.runAction(SKAction.fadeOutWithDuration(2))
+        }
+        
+        runAction(SKAction.sequence([
+            SKAction.waitForDuration(2),
+            Block1,
+            Block2,
+            SKAction.waitForDuration(8),
+            UndoBlock1,
+            UndoBlock2
+            ]))
+        blackOutScreen.runAction(SKAction.sequence([
+            SKAction.waitForDuration(10),
+            SKAction.fadeOutWithDuration(2)
+            ]))
+        
+                
+                
+        if tutorialCounter >= 3{
+            tutorialCounter = 1
+            runAction(SKAction.waitForDuration(12))
+            weAreLeavingTheIntroPage()
+            gameState = .Home
+            runCheckState()
+        }else{
+            tutorialCounter += 1
         }
     }
     func fadeTransitionIn(){
@@ -849,10 +911,12 @@ class GameScene: SKScene {
             self.menuDeletion()
         }
         let endCheckAnim = SKAction.sequence([ move2, wait4me, moveBack2, deleteMenu])
-        if whatsGoing == true{
+        if whatsGoing == true {
             youWinScreen.runAction(endCheckAnim)
             print("timetowin")
-            blackOut()
+            
+            // blackOut()
+            //createIntroAnimation()
             ///////////////////////////////////////////////////////////
             
         }else{
@@ -878,8 +942,12 @@ class GameScene: SKScene {
             levelClicked = 2
             ///donot play tutorial Level Again
         }
+        if levelClicked == 1{
+            createIntroAnimation()
+        }else{
         gameState = .CheckingLevels
         runCheckState()
+        }
     }
     
     func pickLevel(touches: Set<UITouch>, withEvent event: UIEvent?){
