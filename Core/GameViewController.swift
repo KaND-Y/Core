@@ -17,9 +17,9 @@ class GameViewController: UIViewController {
         let scene = GameScene(size: view.frame.size)
         // Configure the view.
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.showsDrawCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
+        //skView.showsDrawCount = true
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true

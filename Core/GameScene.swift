@@ -24,11 +24,12 @@ class GameScene: SKScene {
     var theCircleIsSpinning = true
     
     
-    var timer = 70
+    var timer = 600
     var yourLabel: UILabel = UILabel()
     
     
     var ringsLeftSpinning = 0
+    var beginGame = true
     
     
     //level detection aids
@@ -157,18 +158,6 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         print("startup")
         // asdf
-        var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
-        yourLabel.frame = CGRectMake(50, 150, 200, 21)
-        yourLabel.backgroundColor = UIColor.clearColor()
-        yourLabel.textColor = UIColor.whiteColor()
-        yourLabel.textAlignment = NSTextAlignment.Center
-        var theSec = String(format: "%02d", timer % 60)
-        var unformatSec = timer % 60
-        var unformatMin = (timer - unformatSec) / 60
-        var theMin = String(format: "%02d", unformatMin)
-        yourLabel.text = "00:\(theMin):\(theSec)"
-        yourLabel.font = UIFont(name: "Menlo", size: 20.0)
-        self.view!.addSubview(yourLabel)
         
         //
         
@@ -463,7 +452,7 @@ class GameScene: SKScene {
         addChild(levelButton)
         addChild(titleTXT)
         createBackgroundAnimation()
-        countdown()
+        
         //////////////////////////////////////////////////////////////////
         
         
@@ -490,8 +479,35 @@ class GameScene: SKScene {
     
     func weAreOnTheCheckingLevelsPage(){
         print("we are on the \(gameState) page")
+        
+        if beginGame == true{
+            
+            yourLabel.frame = CGRectMake(50, 150, 200, 21)
+            yourLabel.backgroundColor = UIColor.clearColor()
+            yourLabel.textColor = UIColor.whiteColor()
+            yourLabel.textAlignment = NSTextAlignment.Center
+            var theSec = String(format: "%02d", timer % 60)
+            var unformatSec = timer % 60
+            var unformatMin = (timer - unformatSec) / 60
+            var theMin = String(format: "%02d", unformatMin)
+            yourLabel.text = "00:\(theMin):\(theSec)"
+            yourLabel.font = UIFont(name: "Menlo", size: 20.0)
+            self.view!.addSubview(yourLabel)
+            print("\(yourLabel.text)")
+            
+            yourLabel.center = CGPointMake(50.0, 100.0)
+            
+            var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
+            beginGame = false
+            //countdown()
+            //asdfaf
+        }
+
+        
         if levelClicked > 14{
             levelClicked = 2
+            print("\(yourLabel.text)")
+            yourLabel.removeFromSuperview()
             //donot replay tutorial levels
         }
         print("You Are On Level \(levelClicked + 1)")
@@ -1271,10 +1287,10 @@ class GameScene: SKScene {
                 let location = touch.locationInNode(self)
                 if skipButton.containsPoint(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButton")
-                    weAreLeavingTheIntroPage()
+                    //weAreLeavingTheIntroPage()
                     
-                    gameState = .Home
-                    runCheckState()
+                    //gameState = .Home
+                    //runCheckState()
                     
                 }
             }
@@ -1502,7 +1518,6 @@ class GameScene: SKScene {
                     
                     quitCurrentLevel()
                     resetValues()
-                    
                     gameState = .CheckingLevels
                     runCheckState()
                 }
