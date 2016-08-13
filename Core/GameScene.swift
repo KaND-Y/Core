@@ -391,6 +391,7 @@ class GameScene: SKScene {
                 if levelClicked != 1{
                    gameIsEnded()
                 }else{
+                    levelClicked = 2
                     fingerOne.removeFromParent()
                     createIntroAnimation()
                     quitCurrentLevel()
@@ -726,7 +727,7 @@ class GameScene: SKScene {
             tutorialBlockTwo.texture = SKTexture(imageNamed: "text2")
         } else if tutorialCounter == 2{
             tutorialBlockOne.texture = SKTexture(imageNamed: "text3")
-            tutorialBlockTwo.texture = SKTexture(imageNamed: "text6")
+            tutorialBlockTwo.texture = SKTexture(imageNamed: "pick0")
         } else if tutorialCounter == 3{
             tutorialBlockOne.texture = SKTexture(imageNamed: "text4")
             tutorialBlockTwo.texture = SKTexture(imageNamed: "text5")
