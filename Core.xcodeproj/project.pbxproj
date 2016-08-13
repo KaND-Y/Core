@@ -20,6 +20,7 @@
 		B312FD491D595A3F00C2249E /* lockMeTwo.caf in Resources */ = {isa = PBXBuildFile; fileRef = B312FD461D595A3F00C2249E /* lockMeTwo.caf */; };
 		B379EE891D5E448600C1696A /* myAssets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B379EE881D5E448600C1696A /* myAssets.atlas */; };
 		B379EEAF1D5E7D5400C1696A /* MenuThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B379EEAE1D5E7D5400C1696A /* MenuThing.swift */; };
+		B379EEB11D5EA85D00C1696A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B379EEB01D5EA85D00C1696A /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		B312FD461D595A3F00C2249E /* lockMeTwo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lockMeTwo.caf; sourceTree = "<group>"; };
 		B379EE881D5E448600C1696A /* myAssets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = myAssets.atlas; sourceTree = "<group>"; };
 		B379EEAE1D5E7D5400C1696A /* MenuThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuThing.swift; sourceTree = "<group>"; };
+		B379EEB01D5EA85D00C1696A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				B312FD151D59584A00C2249E /* Main.storyboard */,
 				B312FD1A1D59584A00C2249E /* LaunchScreen.storyboard */,
 				B312FD1D1D59584A00C2249E /* Info.plist */,
+				B379EEB01D5EA85D00C1696A /* Images.xcassets */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				B312FD1C1D59584A00C2249E /* LaunchScreen.storyboard in Resources */,
 				B312FD471D595A3F00C2249E /* fromInside.caf in Resources */,
+				B379EEB11D5EA85D00C1696A /* Images.xcassets in Resources */,
 				B379EE891D5E448600C1696A /* myAssets.atlas in Resources */,
 				B312FD481D595A3F00C2249E /* lockMe.caf in Resources */,
 				B312FD491D595A3F00C2249E /* lockMeTwo.caf in Resources */,
@@ -434,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Core/Info.plist;
@@ -448,6 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Core/Info.plist;
