@@ -12,7 +12,7 @@ import AVFoundation
 /////////////////////////// START! ///////////////////////////
 
 enum GameSceneState {
-    case PlayGame, CheckingWinOrLose, GameOver, CheckingLevels, Pause, Home, Intro, IntroPlay
+    case playGame, checkingWinOrLose, gameOver, checkingLevels, pause, home, intro, introPlay
 }
 
 class GameScene: SKScene {
@@ -45,18 +45,18 @@ class GameScene: SKScene {
     
     //tutorial aids
     var tutorialCounter = 1
-    let fingerOne = SKSpriteNode(texture: SKTexture(imageNamed: "fing0"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
-    let fingerTwo = SKSpriteNode(texture: SKTexture(imageNamed: "fing1"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 60))
-    let tutorialBlockOne = SKSpriteNode(texture: SKTexture(imageNamed: "text1"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
-    let tutorialBlockTwo = SKSpriteNode(texture: SKTexture(imageNamed: "text2"), color: UIColor.blueColor(), size: CGSize(width: 200, height: 100))
+    let fingerOne = SKSpriteNode(texture: SKTexture(imageNamed: "fing0"), color: UIColor.blue, size: CGSize(width: 60, height: 60))
+    let fingerTwo = SKSpriteNode(texture: SKTexture(imageNamed: "fing1"), color: UIColor.blue, size: CGSize(width: 60, height: 60))
+    let tutorialBlockOne = SKSpriteNode(texture: SKTexture(imageNamed: "text1"), color: UIColor.blue, size: CGSize(width: 200, height: 100))
+    let tutorialBlockTwo = SKSpriteNode(texture: SKTexture(imageNamed: "text2"), color: UIColor.blue, size: CGSize(width: 200, height: 100))
     
     
     //rotation counter aid
     let const = CGFloat(12)
     
     //win lose aids
-    let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
-    let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let youWinScreen = SKSpriteNode(texture: SKTexture(imageNamed: "winla"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
+    let youLoseScreen = SKSpriteNode(texture: SKTexture(imageNamed: "losela"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
     var whatsGoing = false
     
     //test aids
@@ -71,15 +71,15 @@ class GameScene: SKScene {
     //win lose aids
     var circSi = 500
     var wantToEnd = false
-    let bCircYea = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 0, height: 0))
+    let bCircYea = SKSpriteNode(color: UIColor.clear, size: CGSize(width: 0, height: 0))
     
     
     //menu aids
-    let menu0 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau0"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
-    let menu1 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau1"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
-    let menu2 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau2"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
-    let menu3 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau3"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
-    let menu4 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau4"), color: UIColor.blueColor(), size: CGSize(width: 500, height: 170))
+    let menu0 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau0"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
+    let menu1 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau1"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
+    let menu2 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau2"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
+    let menu3 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau3"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
+    let menu4 =  SKSpriteNode(texture: SKTexture(imageNamed: "pau4"), color: UIColor.blue, size: CGSize(width: 500, height: 170))
     
     
     
@@ -101,20 +101,20 @@ class GameScene: SKScene {
     
     
     //button aids
-    let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
-    let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
-    let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
-    let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
-    let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 350))
-    let skipButton = SKSpriteNode(texture: SKTexture(imageNamed: "SButton"), color: UIColor.blueColor(), size: CGSize(width: 100, height: 50))
+    let pauseButton = SKSpriteNode(texture: SKTexture(imageNamed: "PButton"), color: UIColor.blue, size: CGSize(width: 100, height: 50))
+    let homeButton = SKSpriteNode(texture: SKTexture(imageNamed: "HButton"), color: UIColor.blue, size: CGSize(width: 100, height: 50))
+    let playButton = SKSpriteNode(texture: SKTexture(imageNamed: "PLButton"), color: UIColor.blue, size: CGSize(width: 100, height: 50))
+    let levelButton = SKSpriteNode(texture: SKTexture(imageNamed: "LButton"), color: UIColor.blue, size: CGSize(width: 100, height: 50))
+    let anotherLevelButton = SKSpriteNode(texture: SKTexture(imageNamed: "AnoB"), color: UIColor.blue, size: CGSize(width: 60, height: 350))
+    let skipButton = SKSpriteNode(texture: SKTexture(imageNamed: "SButton"), color: UIColor.blue, size: CGSize(width: 100, height: 50))
     
     
-    let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blueColor(), size: CGSize(width: 60, height: 20))
+    let pickMe = SKSpriteNode(texture: SKTexture(imageNamed: "pick"), color: UIColor.blue, size: CGSize(width: 60, height: 20))
     
     
     
     //msc aids
-    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blueColor(), size: CGSize(width: 300, height: 180))
+    let titleTXT = SKSpriteNode(texture: SKTexture(imageNamed: "titleYea"), color: UIColor.blue, size: CGSize(width: 300, height: 180))
     var theArrow: SKSpriteNode!
     
     
@@ -127,7 +127,7 @@ class GameScene: SKScene {
     var CurrentSpriteData = [String: SKSpriteNode]()
     
     
-    var gameState: GameSceneState = .Intro
+    var gameState: GameSceneState = .intro
     
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////// basic functions start here //////////////////////////
@@ -136,26 +136,26 @@ class GameScene: SKScene {
     func runCheckState() {
         print("weAreHere")
         switch gameState {
-        case .Home:
+        case .home:
             weAreOnTheHomePage()
-        case .PlayGame:
+        case .playGame:
             weAreOnThePlayGamePage()
-        case .CheckingWinOrLose:
+        case .checkingWinOrLose:
             weAreOntheCheckingWinOrLosePage()
-        case .GameOver:
+        case .gameOver:
             weAreOnTheGameOverPage()
-        case .CheckingLevels:
+        case .checkingLevels:
             weAreOnTheCheckingLevelsPage()
-        case .Pause:
+        case .pause:
             weAreOnThePausePage()
-        case .Intro:
+        case .intro:
             weAreOnTheIntroPage()
-        case .IntroPlay:
+        case .introPlay:
             weAreOnTheIntroPlayPage()
         }
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         print("startup")
         // asdf
         
@@ -237,10 +237,10 @@ class GameScene: SKScene {
         //print("\(arrayOfLevelToPlay) is the different circles (with their perameters) for this level")
         self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
         self.ringsLeftSpinning = numRingCounterForLevel
-        theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+        theArrow = SKSpriteNode(texture: SKTexture(imageNamed: "daArrow"), color: UIColor.blue, size: CGSize(width: 350, height: 350))
         
         
-        let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blueColor(), size: CGSize(width: 50, height: 50))
+        let theLight = SKSpriteNode(texture: SKTexture(imageNamed: "blackLight"), color: UIColor.blue, size: CGSize(width: 50, height: 50))
         theLight.position.x = self.frame.width / 2
         theLight.position.y = self.frame.height / 2
         theLight.zPosition = 1
@@ -262,8 +262,8 @@ class GameScene: SKScene {
             let rSpeed = Double(rSpeedIs)
             
             //gotohere
-            let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
-            let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
+            let rotate = SKAction.rotate(byAngle: CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
+            let rotateBack = SKAction.rotate(byAngle: CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
             
             
             if circleNumber == 0 {
@@ -275,8 +275,8 @@ class GameScene: SKScene {
                 print("arrow to the knee")
             }
             
-            let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
-            let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blueColor(), size: CGSize(width: 350, height: 350))
+            let theCircle = SKSpriteNode(texture: SKTexture(imageNamed: arrayOfCircleImages[circleNumber]), color: UIColor.blue, size: CGSize(width: 350, height: 350))
+            let theNib = SKSpriteNode(texture: SKTexture(imageNamed:arrayOfNibImages[circleNumber]), color: UIColor.blue, size: CGSize(width: 350, height: 350))
             
             if self.RotationDict[currentCircleNum] != nil{
                 self.RotationDict[currentCircleNum]! += 1
@@ -302,29 +302,29 @@ class GameScene: SKScene {
             theNib.position.x = sprite.frame.width / 2
             theNib.position.y = sprite.frame.height / 2
             theNib.zPosition = 1
-            theNib.anchorPoint = CGPointMake(1.0,1.0)
+            theNib.anchorPoint = CGPoint(x: 1.0,y: 1.0)
             
-            let updateDegreeCounter = SKAction.runBlock{
+            let updateDegreeCounter = SKAction.run{
                 self.incrementCircle(currentCircleNum)
             }
             
             let seqOne = SKAction.sequence([rotate, updateDegreeCounter])
-            let repeatLoopOne = SKAction.repeatActionForever(seqOne)
+            let repeatLoopOne = SKAction.repeatForever(seqOne)
             let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
-            let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
-            let anotherLoopOne = SKAction.repeatActionForever(rotate)
-            let anotherLoopTwo = SKAction.repeatActionForever(rotateBack)
+            let repeatLoopTwo = SKAction.repeatForever(seqTwo)
+            let anotherLoopOne = SKAction.repeatForever(rotate)
+            let anotherLoopTwo = SKAction.repeatForever(rotateBack)
             
             
             if arrayOfCircleToCreate.sMoves == 1{
-                sprite.runAction(repeatLoopOne)
+                sprite.run(repeatLoopOne)
                 if sprite.name == "theCircle0"{
-                    theArrow.runAction(anotherLoopOne)
+                    theArrow.run(anotherLoopOne)
                 }
             }else{
-                sprite.runAction(repeatLoopTwo)
+                sprite.run(repeatLoopTwo)
                 if sprite.name == "theCircle0"{
-                    theArrow.runAction(anotherLoopTwo)
+                    theArrow.run(anotherLoopTwo)
                 }
             }
         }
@@ -393,7 +393,7 @@ class GameScene: SKScene {
                 winLoseAnims()
                 winCount = 0
                 if levelClicked != 1{
-                    gameState = .GameOver
+                    gameState = .gameOver
                     runCheckState()
                 }else{
                     tutorialCounter = 2
@@ -411,7 +411,7 @@ class GameScene: SKScene {
             winLoseAnims()
             //gameIsEnded()
             levelClicked = 1
-            gameState = .Intro
+            gameState = .intro
             runCheckState()
             
             print ("WWWWWWWWWWWWWWWWWW")
@@ -482,22 +482,22 @@ class GameScene: SKScene {
         
         if beginGame == true{
             
-            yourLabel.frame = CGRectMake(50, 150, 200, 21)
-            yourLabel.backgroundColor = UIColor.clearColor()
-            yourLabel.textColor = UIColor.whiteColor()
-            yourLabel.textAlignment = NSTextAlignment.Center
-            var theSec = String(format: "%02d", timer % 60)
-            var unformatSec = timer % 60
-            var unformatMin = (timer - unformatSec) / 60
-            var theMin = String(format: "%02d", unformatMin)
+            yourLabel.frame = CGRect(x: 50, y: 150, width: 200, height: 21)
+            yourLabel.backgroundColor = UIColor.clear
+            yourLabel.textColor = UIColor.white
+            yourLabel.textAlignment = NSTextAlignment.center
+            let theSec = String(format: "%02d", timer % 60)
+            let unformatSec = timer % 60
+            let unformatMin = (timer - unformatSec) / 60
+            let theMin = String(format: "%02d", unformatMin)
             yourLabel.text = "00:\(theMin):\(theSec)"
             yourLabel.font = UIFont(name: "Menlo", size: 20.0)
             self.view!.addSubview(yourLabel)
             print("\(yourLabel.text)")
             
-            yourLabel.center = CGPointMake(50.0, 100.0)
+            yourLabel.center = CGPoint(x: 50.0, y: 100.0)
             
-            var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
+            var myClock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
             beginGame = false
             //countdown()
             //asdfaf
@@ -554,7 +554,7 @@ class GameScene: SKScene {
     func weAreOnThePausePage(){
         print("we are on the \(gameState) page")
         menuCreation()
-        loaderScreen = SKSpriteNode(color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSize(width: view!.frame.width, height: view!.frame.height))
+        loaderScreen = SKSpriteNode(color: UIColor.white.withAlphaComponent(0.5), size: CGSize(width: view!.frame.width, height: view!.frame.height))
         loaderScreen.position.x = view!.frame.width / 2
         loaderScreen.position.y = view!.frame.height / 2
         loaderScreen.zPosition = 3
@@ -590,34 +590,34 @@ class GameScene: SKScene {
     ////////////////////////////////////////////////////////////////////////////////
     
     func testLevel(){
-        let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2, duration: 6)
-        rotateForever = SKAction.repeatActionForever(rotate)
-        let rotatecircleTwo = SKAction.rotateByAngle(CGFloat(M_PI) * 2, duration: 4)
-        rotatecircleTwoForever = SKAction.repeatActionForever(rotatecircleTwo)
+        let rotate = SKAction.rotate(byAngle: CGFloat(M_PI) * 2, duration: 6)
+        rotateForever = SKAction.repeatForever(rotate)
+        let rotatecircleTwo = SKAction.rotate(byAngle: CGFloat(M_PI) * 2, duration: 4)
+        rotatecircleTwoForever = SKAction.repeatForever(rotatecircleTwo)
         
-        circleOne = SKSpriteNode(texture: SKTexture(imageNamed:"blackRingSetOne"), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
+        circleOne = SKSpriteNode(texture: SKTexture(imageNamed:"blackRingSetOne"), color: UIColor.blue, size: CGSize(width: 400, height: 400))
         addChild(circleOne)
         circleOne.position.x = view!.frame.width / 2
         circleOne.position.y = view!.frame.height / 2
-        circleOne.runAction(rotateForever)
+        circleOne.run(rotateForever)
         
-        circleTwo = SKSpriteNode(texture: SKTexture(imageNamed:"blackRingSetTwo"), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
+        circleTwo = SKSpriteNode(texture: SKTexture(imageNamed:"blackRingSetTwo"), color: UIColor.blue, size: CGSize(width: 400, height: 400))
         addChild(circleTwo)
         circleTwo.position.x = view!.frame.width / 2
         circleTwo.position.y = view!.frame.height / 2
-        circleTwo.runAction(rotatecircleTwoForever)
+        circleTwo.run(rotatecircleTwoForever)
         print("both the circleOne and the circleTwo have started moving")
         
-        let nibOne = SKSpriteNode(texture: SKTexture(imageNamed:"blackNibSetFive"), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
-        let nibTwo = SKSpriteNode(texture: SKTexture(imageNamed:"blackNibSetFour"), color: UIColor.blueColor(), size: CGSize(width: 400, height: 400))
+        let nibOne = SKSpriteNode(texture: SKTexture(imageNamed:"blackNibSetFive"), color: UIColor.blue, size: CGSize(width: 400, height: 400))
+        let nibTwo = SKSpriteNode(texture: SKTexture(imageNamed:"blackNibSetFour"), color: UIColor.blue, size: CGSize(width: 400, height: 400))
         
         circleOne.addChild(nibOne)
-        nibOne.anchorPoint = CGPointMake(1.0,1.0)
+        nibOne.anchorPoint = CGPoint(x: 1.0,y: 1.0)
         nibOne.position.x = circleOne.frame.width / 2
         nibOne.position.y = circleOne.frame.height / 2
         
         circleTwo.addChild(nibTwo)
-        nibTwo.anchorPoint = CGPointMake(1.0,1.0)
+        nibTwo.anchorPoint = CGPoint(x: 1.0,y: 1.0)
         nibTwo.position.x = circleTwo.frame.width / 2
         nibTwo.position.y = circleTwo.frame.height / 2
     }
@@ -646,14 +646,14 @@ class GameScene: SKScene {
         if touch != pauseButton && counter < 1 && counter >= 0 {
             circleOne.removeAllActions()
             counter += 1
-            self.runAction(clickSound)
+            self.run(clickSound)
             circleOneIsSpinning = false
             print("the circleOne has stopped moving and the counter's count is \(counter)")
             
         }else if counter < 2 && counter >= 1 {
             circleTwo.removeAllActions()
             counter += 1
-            self.runAction(clickSound)
+            self.run(clickSound)
             circleTwoIsSpinning = false
             print("the circleTwo has stopped moving and the counter's count is \(counter)")
             
@@ -666,8 +666,8 @@ class GameScene: SKScene {
             counter = 0
             
             
-            circleOne.runAction(rotateForever)
-            circleTwo.runAction(rotatecircleTwoForever)
+            circleOne.run(rotateForever)
+            circleTwo.run(rotatecircleTwoForever)
             print("both the circleOne and the circleTwo have started moving again and the counter's count is \(counter)")
         }
     }
@@ -698,39 +698,39 @@ class GameScene: SKScene {
     func countdown() {
         timer -= 1
         print("\(timer)")
-        var theSec = String(format: "%02d", timer % 60)
-        var unformatSec = timer % 60
-        var unformatMin = (timer - unformatSec) / 60
-        var theMin = String(format: "%02d", unformatMin)
+        let theSec = String(format: "%02d", timer % 60)
+        let unformatSec = timer % 60
+        let unformatMin = (timer - unformatSec) / 60
+        let theMin = String(format: "%02d", unformatMin)
         yourLabel.text = "00:\(theMin):\(theSec)"
         if timer == 0{
             ////////////////////////////////////////////////////////////////////////
             yourLabel.removeFromSuperview()
-            var myClock = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
+            let myClock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameScene.countdown), userInfo: nil, repeats: true)
             myClock.invalidate()
         }
     }
     
     func createIntroAnimation(){
-        let blackout = SKAction.runBlock{
+        let blackout = SKAction.run{
             self.blackOut()
         }
-        let introcheckstate = SKAction.runBlock{
+        let introcheckstate = SKAction.run{
             self.weAreLeavingTheIntroPage()
-            self.gameState = .IntroPlay
+            self.gameState = .introPlay
             self.loadGameLevelSelected()
         }
-        let introSequence = SKAction.sequence([blackout, SKAction.waitForDuration(11), introcheckstate])
+        let introSequence = SKAction.sequence([blackout, SKAction.wait(forDuration: 11), introcheckstate])
         if tutorialCounter == 3 {
-            self.runAction(blackout)
+            self.run(blackout)
         }else{
-            self.runAction(introSequence)
+            self.run(introSequence)
         }
     }
     
     func blackOut(){
         
-        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        let blackOutScreen = SKSpriteNode(color: UIColor.black, size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.zPosition = 5
         blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
@@ -753,52 +753,52 @@ class GameScene: SKScene {
         
         tutorialBlockOne.position.x = self.frame.width * (1 / 32)
         tutorialBlockOne.position.y = self.frame.height * (31 / 32)
-        tutorialBlockOne.anchorPoint = CGPointMake(0.0, 1.0)
+        tutorialBlockOne.anchorPoint = CGPoint(x: 0.0, y: 1.0)
         tutorialBlockOne.zPosition = 6
         
         tutorialBlockTwo.position.x = self.frame.width * (31 / 32)
         tutorialBlockTwo.position.y = self.frame.height * (6 / 32)
-        tutorialBlockTwo.anchorPoint = CGPointMake(1.0, 0.0)
+        tutorialBlockTwo.anchorPoint = CGPoint(x: 1.0, y: 0.0)
         tutorialBlockTwo.zPosition = 6
         
-        blackOutScreen.runAction(SKAction.fadeInWithDuration(2))
+        blackOutScreen.run(SKAction.fadeIn(withDuration: 2))
         
-        let Block1 =  SKAction.runBlock{
+        let Block1 =  SKAction.run{
             self.addChild(self.tutorialBlockOne)
         }
         
-        let Block2 = SKAction.runBlock{
+        let Block2 = SKAction.run{
             self.addChild(self.tutorialBlockTwo)
         }
         
-        let UndoBlock1 =  SKAction.runBlock{
+        let UndoBlock1 =  SKAction.run{
             self.tutorialBlockOne.removeFromParent()
         }
         
-        let UndoBlock2 = SKAction.runBlock{
+        let UndoBlock2 = SKAction.run{
             self.tutorialBlockTwo.removeFromParent()
         }
         
-        runAction(SKAction.sequence([
-            SKAction.waitForDuration(2),
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 2),
             Block1,
             Block2,
-            SKAction.waitForDuration(8),
+            SKAction.wait(forDuration: 8),
             UndoBlock1,
             UndoBlock2
             ]))
-        blackOutScreen.runAction(SKAction.sequence([
-            SKAction.waitForDuration(10),
-            SKAction.fadeOutWithDuration(2)
+        blackOutScreen.run(SKAction.sequence([
+            SKAction.wait(forDuration: 10),
+            SKAction.fadeOut(withDuration: 2)
             ]))
         
                 
                 
         if tutorialCounter >= 3{
             tutorialCounter = 1
-            runAction(SKAction.waitForDuration(12))
+            run(SKAction.wait(forDuration: 12))
             weAreLeavingTheIntroPage()
-            gameState = .Home
+            gameState = .home
             runCheckState()
         }else{
             tutorialCounter += 1
@@ -806,33 +806,33 @@ class GameScene: SKScene {
     }
     func fadeTransitionIn(){
         
-        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        let blackOutScreen = SKSpriteNode(color: UIColor.black, size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.zPosition = 5
         blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
         
         
-        let One = SKAction.fadeInWithDuration(0.25)
-        let Two = SKAction.waitForDuration(0.5)
+        let One = SKAction.fadeIn(withDuration: 0.25)
+        let Two = SKAction.wait(forDuration: 0.5)
         
         let sequence = SKAction.sequence([One, Two])
-        blackOutScreen.runAction(sequence)
+        blackOutScreen.run(sequence)
         
     }
     func fadeTransitionOut(){
         
-        let blackOutScreen = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
+        let blackOutScreen = SKSpriteNode(color: UIColor.black, size: CGSize(width: view!.frame.width * 2, height: view!.frame.height * 2))
         blackOutScreen.alpha = 1.0
         blackOutScreen.zPosition = 5
         // blackOutScreen.alpha = 0.0
         addChild(blackOutScreen)
         
         
-        let Two = SKAction.waitForDuration(0.5)
+        let Two = SKAction.wait(forDuration: 0.5)
         
-        let Three = SKAction.fadeOutWithDuration(0.25)
+        let Three = SKAction.fadeOut(withDuration: 0.25)
         let sequence = SKAction.sequence([Two, Three])
-        blackOutScreen.runAction(sequence)
+        blackOutScreen.run(sequence)
     }
     
     
@@ -842,9 +842,9 @@ class GameScene: SKScene {
         fingerOne.zPosition = 5
         
         addChild(fingerOne)
-        let clickyFinger = SKAction.animateWithTextures([SKTexture(imageNamed: "fing0"), SKTexture(imageNamed: "fing1")], timePerFrame: 0.5)
-        let clickyFingerForever = SKAction.repeatActionForever(clickyFinger)
-        fingerOne.runAction(clickyFingerForever)
+        let clickyFinger = SKAction.animate(with: [SKTexture(imageNamed: "fing0"), SKTexture(imageNamed: "fing1")], timePerFrame: 0.5)
+        let clickyFingerForever = SKAction.repeatForever(clickyFinger)
+        fingerOne.run(clickyFingerForever)
     }
     
     func tutorialOneEnd(){
@@ -855,31 +855,31 @@ class GameScene: SKScene {
     func levelPix(){
         //to find location of the level picker counter and animate it to move to the next level
         if levelClicked == 0{
-            let pixmove = SKAction.moveToY(self.frame.height / 2 - 150, duration: 0.1)
+            let pixmove = SKAction.moveTo(y: self.frame.height / 2 - 150, duration: 0.1)
         }else if levelClicked <= 14{
             let numbPixUp = CGFloat(20 * (levelClicked + 1))
-            let  pixmove = SKAction.moveToY(self.frame.height / 2 - 150 + numbPixUp, duration: 2)
-            pickMe.runAction(pixmove)
+            let  pixmove = SKAction.moveTo(y: self.frame.height / 2 - 150 + numbPixUp, duration: 2)
+            pickMe.run(pixmove)
         }else{
             levelClicked = 0
             let numbPix = 0
-            let pixmove = SKAction.moveToY(self.frame.height / 2 - 150, duration: 2)
+            let pixmove = SKAction.moveTo(y: self.frame.height / 2 - 150, duration: 2)
         }
         
     }
     
     func menuCreation(){
-        let menuMove0 = SKAction.moveToX(view!.frame.width / 2, duration: 1 / 2)
-        let menuMove1 = SKAction.moveToY(view!.frame.height * (7 / 12), duration: 1 / 2)
-        menu0.runAction(menuMove0)
+        let menuMove0 = SKAction.moveTo(x: view!.frame.width / 2, duration: 1 / 2)
+        let menuMove1 = SKAction.moveTo(y: view!.frame.height * (7 / 12), duration: 1 / 2)
+        menu0.run(menuMove0)
         addChild(menu1)
-        menu2.runAction(menuMove0)
-        menu3.runAction(menuMove0)
-        menu4.runAction(menuMove0)
-        menu0.runAction(menuMove1)
-        menu2.runAction(menuMove1)
-        menu3.runAction(menuMove1)
-        menu4.runAction(menuMove1)
+        menu2.run(menuMove0)
+        menu3.run(menuMove0)
+        menu4.run(menuMove0)
+        menu0.run(menuMove1)
+        menu2.run(menuMove1)
+        menu3.run(menuMove1)
+        menu4.run(menuMove1)
     }
     
     func menuDeletion(){
@@ -921,15 +921,15 @@ class GameScene: SKScene {
     func winLoseAnims(){
         menuCreation()
         
-        let wait4me = SKAction.waitForDuration(0.5)
-        let move2 = SKAction.moveToY(self.view!.frame.height * (7 / 12), duration: 1)
-        let moveBack2 = SKAction.moveToY(self.view!.frame.height * 2, duration: 0.7)
-        let deleteMenu = SKAction.runBlock{
+        let wait4me = SKAction.wait(forDuration: 0.5)
+        let move2 = SKAction.moveTo(y: self.view!.frame.height * (7 / 12), duration: 1)
+        let moveBack2 = SKAction.moveTo(y: self.view!.frame.height * 2, duration: 0.7)
+        let deleteMenu = SKAction.run{
             self.menuDeletion()
         }
         let endCheckAnim = SKAction.sequence([ move2, wait4me, moveBack2, deleteMenu])
         if whatsGoing == true {
-            youWinScreen.runAction(endCheckAnim)
+            youWinScreen.run(endCheckAnim)
             print("timetowin")
             
             // blackOut()
@@ -937,7 +937,7 @@ class GameScene: SKScene {
             ///////////////////////////////////////////////////////////
             
         }else{
-            youLoseScreen.runAction(endCheckAnim)
+            youLoseScreen.run(endCheckAnim)
             print("timetolose")
             
         }
@@ -962,26 +962,26 @@ class GameScene: SKScene {
         if levelClicked == 1{
             createIntroAnimation()
         }else{
-        gameState = .CheckingLevels
+        gameState = .checkingLevels
         runCheckState()
         }
     }
     
-    func pickLevel(touches: Set<UITouch>, withEvent event: UIEvent?){
+    func pickLevel(_ touches: Set<UITouch>, withEvent event: UIEvent?){
         for touch: AnyObject in touches {
             
-            let location = touch.locationInNode(self)
-            if anotherLevelButton.containsPoint(location){
+            let location = touch.location(in: self)
+            if anotherLevelButton.contains(location){
                 //put code here
             }
         }
     }
     
     func audioSetUp(){
-        let path = NSBundle.mainBundle().pathForResource("fromInside", ofType:".caf")!
-        let url = NSURL(fileURLWithPath: path)
+        let path = Bundle.main.path(forResource: "fromInside", ofType:".caf")!
+        let url = URL(fileURLWithPath: path)
         do {
-            let sound = try AVAudioPlayer(contentsOfURL: url)
+            let sound = try AVAudioPlayer(contentsOf: url)
             backgroundSFX = sound
             sound.play()
         } catch {
@@ -1002,7 +1002,7 @@ class GameScene: SKScene {
         bCircYea.position.y =  0
     }
     
-    func incrementCircle(currentCircleNum : String) {
+    func incrementCircle(_ currentCircleNum : String) {
         if let v = self.RotationDict[currentCircleNum] {
             self.RotationDict[currentCircleNum]! += 1
         } else {
@@ -1014,7 +1014,7 @@ class GameScene: SKScene {
     
     
     func backgroundSetup(){
-        backgroundScreen = SKSpriteNode(texture: SKTexture(imageNamed:"backgroundSetTwo"), color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSize(width: view!.frame.width * 3.5, height: view!.frame.height * 2))
+        backgroundScreen = SKSpriteNode(texture: SKTexture(imageNamed:"backgroundSetTwo"), color: UIColor.white.withAlphaComponent(0.5), size: CGSize(width: view!.frame.width * 3.5, height: view!.frame.height * 2))
         backgroundScreen.alpha = 0.04
         backgroundScreen.position.x = view!.frame.width / 2
         backgroundScreen.position.y = view!.frame.height / 2
@@ -1030,36 +1030,36 @@ class GameScene: SKScene {
         self.bCircYea.zPosition =  0 - 1
         
         for numyea in 1...5{
-            let rotateyea = SKAction.rotateByAngle(CGFloat(M_PI) / 2, duration: Double(numyea) )
-            let foreveryea = SKAction.repeatActionForever(rotateyea)
-            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blueColor(), size: CGSize(width: circSi, height: circSi))
+            let rotateyea = SKAction.rotate(byAngle: CGFloat(M_PI) / 2, duration: Double(numyea) )
+            let foreveryea = SKAction.repeatForever(rotateyea)
+            let circYea = SKSpriteNode(texture: SKTexture(imageNamed: "backCirc_\(numyea)"), color: UIColor.blue, size: CGSize(width: circSi, height: circSi))
             circYea.position.x = bCircYea.frame.width / 2
             circYea.position.y = bCircYea.frame.height / 2
             
-            circYea.anchorPoint = CGPointMake(0.5,0.5)
+            circYea.anchorPoint = CGPoint(x: 0.5,y: 0.5)
             
             circYea.zPosition =  0 - 1
             circYea.alpha = 0.22
             
             print("background \(numyea)")
             bCircYea.addChild(circYea)
-            circYea.runAction(foreveryea)
+            circYea.run(foreveryea)
         }
         
     }
     
     func createBackgroundAnimation(){
         
-        if gameState == .Home{
+        if gameState == .home{
             bCircYea.position.x = self.frame.width / 2
             bCircYea.position.y = self.frame.height / 2
-        }else if gameState == .PlayGame || gameState == .GameOver{
+        }else if gameState == .playGame || gameState == .gameOver{
             bCircYea.position.x = self.frame.width / 2
             bCircYea.position.y =  0
-        }else if gameState == .Pause {
+        }else if gameState == .pause {
             bCircYea.position.x = self.frame.width / 2
             bCircYea.position.y =  self.frame.height
-        }else if gameState == .CheckingLevels{
+        }else if gameState == .checkingLevels{
             bCircYea.position.x = self.frame.width * (5 / 6)
             bCircYea.position.y =  self.frame.height * (5 / 6)
         }else{
@@ -1078,90 +1078,90 @@ class GameScene: SKScene {
     ////////////////////////////// user touch functions ////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
-        if gameState == .Home{
+        if gameState == .home{
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if levelButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
                 }
             }
         }
-        else if gameState == .Intro{
+        else if gameState == .intro{
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if skipButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButtonx")
                 }else{
                     
                 }
             }
         }
-        else if gameState == .IntroPlay{
+        else if gameState == .introPlay{
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if skipButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButtonx")
                 }else{
                     
                 }
             }
         }
-        else if gameState == .PlayGame{
+        else if gameState == .playGame{
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if pauseButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if pauseButton.contains(location) {
                     pauseButton.texture = SKTexture(imageNamed:"PButtonx")
                 }else{
                     
                 }
             }
         }
-        else if gameState == .CheckingWinOrLose {
+        else if gameState == .checkingWinOrLose {
             return
             
         }
-        else if gameState == .GameOver {
+        else if gameState == .gameOver {
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if homeButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
-                }else if levelButton.containsPoint(location) {
+                }else if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
-                } else if playButton.containsPoint(location) {
+                } else if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
                 }
             }
         }
-        else if gameState == .CheckingLevels{
+        else if gameState == .checkingLevels{
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if homeButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
-                }else if playButton.containsPoint(location) {
+                }else if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
-                }else if anotherLevelButton.containsPoint(location) {
+                }else if anotherLevelButton.contains(location) {
                     ///////////////////////////////////////////////////////////////////////////////////////////asdfasdf
                 }else{
                     
                 }
             }
         }
-        else if gameState == .Pause{
+        else if gameState == .pause{
             
             //fix bug with circleOne stopping--pause--circleOne moving again
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if playButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
-                }else if homeButton.containsPoint(location) {
+                }else if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
-                }else if levelButton.containsPoint(location) {
+                }else if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
                     
                 }
@@ -1170,53 +1170,53 @@ class GameScene: SKScene {
     }
     
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         //apologies for such redunant code :'(
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if gameState == .Home{
-                if levelButton.containsPoint(location) {
+            if gameState == .home{
+                if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
                 } else{
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                 }
             }
-            else if gameState == .Intro{
-                if skipButton.containsPoint(location) {
+            else if gameState == .intro{
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButtonx")
                 } else{
                     skipButton.texture = SKTexture(imageNamed:"SButton")
                 }
             }
-            else if gameState == .IntroPlay{
-                if skipButton.containsPoint(location) {
+            else if gameState == .introPlay{
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButtonx")
                 } else{
                     skipButton.texture = SKTexture(imageNamed:"SButton")
                 }
             }
-            else if gameState == .PlayGame{
-                if pauseButton.containsPoint(location) {
+            else if gameState == .playGame{
+                if pauseButton.contains(location) {
                     pauseButton.texture = SKTexture(imageNamed:"PButtonx")
                 } else{
                     pauseButton.texture = SKTexture(imageNamed:"PButton")
                 }
             }
-            else if gameState == .CheckingWinOrLose {
+            else if gameState == .checkingWinOrLose {
                 return
                 
             }
-            else if gameState == .GameOver {
-                if playButton.containsPoint(location) {
+            else if gameState == .gameOver {
+                if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     levelButton.texture = SKTexture(imageNamed:"LButton")
-                } else if homeButton.containsPoint(location) {
+                } else if homeButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
                     levelButton.texture = SKTexture(imageNamed:"LButton")
-                } else if levelButton.containsPoint(location) {
+                } else if levelButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
@@ -1226,14 +1226,14 @@ class GameScene: SKScene {
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                 }
             }
-            else if gameState == .CheckingLevels{
-                if playButton.containsPoint(location) {
+            else if gameState == .checkingLevels{
+                if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
-                } else if homeButton.containsPoint(location) {
+                } else if homeButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
-                } else if anotherLevelButton.containsPoint(location) {
+                } else if anotherLevelButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                 } else{
@@ -1241,17 +1241,17 @@ class GameScene: SKScene {
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                 }
             }
-            else if gameState == .Pause{
+            else if gameState == .pause{
                 
-                if playButton.containsPoint(location) {
+                if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButtonx")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     levelButton.texture = SKTexture(imageNamed:"LButton")
-                } else if homeButton.containsPoint(location) {
+                } else if homeButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButtonx")
                     levelButton.texture = SKTexture(imageNamed:"LButton")
-                } else if levelButton.containsPoint(location) {
+                } else if levelButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     levelButton.texture = SKTexture(imageNamed:"LButtonx")
@@ -1266,26 +1266,26 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if gameState == .Home{
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if gameState == .home{
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if levelButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                     
                     weAreLeavingTheHomePage()
                     
-                    gameState = .CheckingLevels
+                    gameState = .checkingLevels
                     runCheckState()
                 }
             }
         }
-        else if gameState == .Intro {
+        else if gameState == .intro {
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if skipButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButton")
                     //weAreLeavingTheIntroPage()
                     
@@ -1295,19 +1295,19 @@ class GameScene: SKScene {
                 }
             }
         }
-        else if gameState == .IntroPlay {
+        else if gameState == .introPlay {
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if skipButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if skipButton.contains(location) {
                     skipButton.texture = SKTexture(imageNamed:"SButton")
                     weAreLeavingTheIntroPage()
                     
-                    gameState = .Home
+                    gameState = .home
                     runCheckState()
                     
                 }else{
-                    self.runAction(clickSound)
+                    self.run(clickSound)
                     // testTouch()
                     // testTouchTwo()
                     
@@ -1316,7 +1316,7 @@ class GameScene: SKScene {
                         theArrow.removeAllActions()
                         ringsLeftSpinning -= 1
                         if ringsLeftSpinning <= -1 {
-                            gameState = .CheckingWinOrLose
+                            gameState = .checkingWinOrLose
                             runCheckState()
                         }
                     }else if levelClicked == 1{
@@ -1326,7 +1326,7 @@ class GameScene: SKScene {
                         }
                         ringsLeftSpinning -= 1
                         if ringsLeftSpinning <= -1 {
-                            gameState = .CheckingWinOrLose
+                            gameState = .checkingWinOrLose
                             runCheckState()
                         }
                     }else{
@@ -1335,10 +1335,10 @@ class GameScene: SKScene {
                 }
             }
         }
-        else if gameState == .PlayGame{
+        else if gameState == .playGame{
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if pauseButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if pauseButton.contains(location) {
                     
                     let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
                     self.numRingCounterForLevel = arrayOfLevelToPlay.count - 1
@@ -1359,10 +1359,10 @@ class GameScene: SKScene {
                     
                     weAreLeavingThePlayGamePage()
                     
-                    gameState = .Pause
+                    gameState = .pause
                     runCheckState()
                 }else{
-                    self.runAction(clickSound)
+                    self.run(clickSound)
                     // testTouch()
                     // testTouchTwo()
                     
@@ -1376,75 +1376,75 @@ class GameScene: SKScene {
                     }
                     ringsLeftSpinning -= 1
                     if ringsLeftSpinning <= -1 {
-                        gameState = .CheckingWinOrLose
+                        gameState = .checkingWinOrLose
                         runCheckState()
                     }
                     
                 }
             }
         }
-        else if gameState == .CheckingWinOrLose {
+        else if gameState == .checkingWinOrLose {
             return
         }
-        else if gameState == .GameOver {
+        else if gameState == .gameOver {
             
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if homeButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     
                     weAreLeavingTheGameOverPage()
                     
-                    gameState = .Home
+                    gameState = .home
                     runCheckState()
                     
-                }else if levelButton.containsPoint(location) {
+                }else if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                     
                     weAreLeavingTheGameOverPage()
                     
-                    gameState = .CheckingLevels
+                    gameState = .checkingLevels
                     runCheckState()
                     
-                } else if playButton.containsPoint(location) {
+                } else if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     weAreLeavingTheGameOverPage()
                     
-                    gameState = .PlayGame
+                    gameState = .playGame
                     runCheckState()
                 }
             }
         }
-        else if gameState == .CheckingLevels{
+        else if gameState == .checkingLevels{
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if homeButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     
                     weAreLeavingtheCheckingLevelsPage()
                     
-                    gameState = .Home
+                    gameState = .home
                     runCheckState()
                     
-                }else if playButton.containsPoint(location) {
+                }else if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     weAreLeavingtheCheckingLevelsPage()
                     
-                    gameState = .PlayGame
+                    gameState = .playGame
                     runCheckState()
-                }else if anotherLevelButton.containsPoint(location) {
+                }else if anotherLevelButton.contains(location) {
                     //testAllLevels()
                 }
             }
         }
-        else if gameState == .Pause{
+        else if gameState == .pause{
             
             //fix bug with circleOne stopping--pause--circleOne moving again
             for touch: AnyObject in touches {
-                let location = touch.locationInNode(self)
-                if playButton.containsPoint(location) {
+                let location = touch.location(in: self)
+                if playButton.contains(location) {
                     playButton.texture = SKTexture(imageNamed:"PLButton")
                     
                     let arrayOfLevelToPlay = Levels.infoForLevels[levelClicked]
@@ -1461,30 +1461,30 @@ class GameScene: SKScene {
                         let rSpeed = Double(rSpeedIs)
                         
                         //////////////////////////////////////////////////////////////////////////////////
-                        let rotate = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
-                        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
+                        let rotate = SKAction.rotate(byAngle: CGFloat(M_PI) * 2 / const, duration: rSpeed / 16)
+                        let rotateBack = SKAction.rotate(byAngle: CGFloat(M_PI) * 2 / -const, duration: rSpeed / 16)
                         let currentCircleNum = "currentCircleNum_\(circleNumber)"
                         
-                        let updateDegreeCounter = SKAction.runBlock{
+                        let updateDegreeCounter = SKAction.run{
                             self.incrementCircle(currentCircleNum)
                         }
                         let seqOne = SKAction.sequence([rotate, updateDegreeCounter])
-                        let repeatLoopOne = SKAction.repeatActionForever(seqOne)
+                        let repeatLoopOne = SKAction.repeatForever(seqOne)
                         let seqTwo = SKAction.sequence([rotateBack, updateDegreeCounter])
-                        let repeatLoopTwo = SKAction.repeatActionForever(seqTwo)
-                        let anotherLoopOne = SKAction.repeatActionForever(rotate)
-                        let anotherLoopTwo = SKAction.repeatActionForever(rotateBack)
+                        let repeatLoopTwo = SKAction.repeatForever(seqTwo)
+                        let anotherLoopOne = SKAction.repeatForever(rotate)
+                        let anotherLoopTwo = SKAction.repeatForever(rotateBack)
                         
                         
                         if arrayOfCircleToCreate.sMoves == 1{
-                            sprite!.runAction(repeatLoopOne)
+                            sprite!.run(repeatLoopOne)
                             if sprite!.name == "theCircle0"{
-                                theArrow.runAction(anotherLoopOne)
+                                theArrow.run(anotherLoopOne)
                             }
                         }else{
-                            sprite!.runAction(repeatLoopTwo)
+                            sprite!.run(repeatLoopTwo)
                             if sprite!.name == "theCircle0"{
-                                theArrow.runAction(anotherLoopTwo)
+                                theArrow.run(anotherLoopTwo)
                             }
                         }
                     }
@@ -1499,33 +1499,33 @@ class GameScene: SKScene {
                     
                     resetValues()
                     
-                    gameState = .PlayGame
+                    gameState = .playGame
                     //runCheckState()
                     
-                }else if homeButton.containsPoint(location) {
+                }else if homeButton.contains(location) {
                     homeButton.texture = SKTexture(imageNamed:"HButton")
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
                     resetValues()
                     
-                    gameState = .Home
+                    gameState = .home
                     runCheckState()
                     
-                }else if levelButton.containsPoint(location) {
+                }else if levelButton.contains(location) {
                     levelButton.texture = SKTexture(imageNamed:"LButton")
                     weAreLeavingThePausePage()
                     
                     quitCurrentLevel()
                     resetValues()
-                    gameState = .CheckingLevels
+                    gameState = .checkingLevels
                     runCheckState()
                 }
             }
         }
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         //
     }
     
@@ -1533,7 +1533,7 @@ class GameScene: SKScene {
     ///////////////////////////////// Update Functions ////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
     }

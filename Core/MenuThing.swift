@@ -12,14 +12,14 @@ class MenuThing: SKSpriteNode {
     
     let message: SKLabelNode
     let box: SKSpriteNode
-    private var inTransition = false
+    fileprivate var inTransition = false
     
     
     // MARK: - Init
     
     init(size: CGSize) {
         message =  SKLabelNode(fontNamed: "Helvetica")
-        box = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 50, height: 50))
+        box = SKSpriteNode(color: UIColor.red, size: CGSize(width: 50, height: 50))
         
         super.init(texture: nil, color: UIColor(white: 0, alpha: 1), size: size)
     
@@ -51,48 +51,48 @@ class MenuThing: SKSpriteNode {
     
     // MARK: - Helper Methods
     
-    func showWithMessageString(str: String) {
+    func showWithMessageString(_ str: String) {
         if inTransition {
             return
         }
         
         // Set up properties of objects
         inTransition = true
-        hidden = false
+        isHidden = false
         alpha = 0
         message.text = str
         message.alpha = 0
         box.alpha = 0
         
         // Run action on objects
-        runAction(SKAction.fadeInWithDuration(2))
+        run(SKAction.fadeIn(withDuration: 2))
         
-        message.runAction(SKAction.sequence([
-            SKAction.waitForDuration(2),
-            SKAction.fadeInWithDuration(1)
+        message.run(SKAction.sequence([
+            SKAction.wait(forDuration: 2),
+            SKAction.fadeIn(withDuration: 1)
             ]))
         
-        box.runAction(SKAction.sequence([
-            SKAction.waitForDuration(3),
-            SKAction.fadeInWithDuration(2)
+        box.run(SKAction.sequence([
+            SKAction.wait(forDuration: 3),
+            SKAction.fadeIn(withDuration: 2)
             ]))
         
-        runAction(SKAction.sequence([
-            SKAction.waitForDuration(5),
-            SKAction.runBlock({
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 5),
+            SKAction.run({
                 self.inTransition = false
             })]))
     
     }
     
-    func hideWithDuration(duration: NSTimeInterval) {
+    func hideWithDuration(_ duration: TimeInterval) {
         if inTransition {
             return
         }
         
         inTransition = true
-        runAction(SKAction.sequence([SKAction.fadeOutWithDuration(duration), SKAction.runBlock({ 
-            self.hidden = true
+        run(SKAction.sequence([SKAction.fadeOut(withDuration: duration), SKAction.run({ 
+            self.isHidden = true
             self.inTransition = false
         })]))
     }
